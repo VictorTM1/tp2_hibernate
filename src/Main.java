@@ -15,7 +15,7 @@
  *
  * @author ventilooo
  */
-public class Main {
+public class main {
 
     /**
      * @param args the command line arguments
