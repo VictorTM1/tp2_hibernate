@@ -3,9 +3,9 @@ INF2015 Projet de session – Hiver 2016 [TEAM18]
 
 ### Membre du Groupe :
 *  Istvan SZALAI [SZAI29079604] Github: ventilooo
-*  Robeen Simeon [] Github: r-obeen
-*  Victor        [] Github: VictorTM1 
-*  Carlos Nossa  [] Github: dvmedellin
+*  Robeen Simeon [SIMR17019608] Github: r-obeen
+*  Victor        [TRUV04069307] Github: VictorTM1 
+*  Carlos Nossa  [NOSC06018807] Github: dvmedellin
 
 Backlog Préliminaire:
 ---------------------
