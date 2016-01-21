@@ -11,14 +11,14 @@ Backlog Préliminaire:
 ---------------------
 
 * Jsonizer
-	* Récupérée les donnés associé.
-	* Géneré un Json de sortie avec les donnée.
+	* [ ] Récupérée les donnés associé.
+	* [ ] Géneré un Json de sortie avec les donnée.
 * Calcul des Données
-	* le montant de la valeur du lot selon la superficie et le prix du m2 pour le lot en question.
-	* le montant pour les droits de passage.
-	* le montant pour les services.
+	* [ ] le montant de la valeur du lot selon la superficie et le prix du m2 pour le lot en question.
+	* [ ] le montant pour les droits de passage.
+	* [ ] le montant pour les services.
 * Génération du Json de sortie
-	* Récupérée les donnés associé.
-	* Géneré le Json de sortie avec les donné associé.
+	* [ ] Récupérée les donnés associé.
+	* [ ] Géneré le Json de sortie avec les donné associé.
     
 [Backlog Trello](https://trello.com/b/uZq6ddwg)
