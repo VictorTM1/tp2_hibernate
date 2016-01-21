@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+
+/**
+ * @author dvmedellin
+ */
+public class Terrain {
+    private static final float PRIX_DE_BASE = 733.77f;    
+    private static final float TAXE_SCOLAIRE = 0.012f; //1.2%
+    private static final float TAXE_MUNICIPALE = 0.025f; //1.2%
+    
+    int type;
+    float prixMin, prixMax;
+    ArrayList<Lot> liste_lots;
+    
+    public Terrain(){
+        this.type = 0;
+        this.prixMin = 0;
+        this.prixMax = 0;
+        this.liste_lots = new ArrayList<Lot>();
+    }
+    
+    public Terrain(int type, float min, float max, ArrayList<Lot> lots){
+        this.type = type;
+        this.prixMin = min;
+        this.prixMax = max;
+        this.liste_lots=lots;
+    }
+    
+    public ArrayList<Lot> getListeLots(){
+        return this.liste_lots;
+    }
+    
+    public int getType(){
+        return this.type;
+    }
+    
+    public float getPrixMin(){
+        return this.prixMin;
+    }
+    
+    public float getPrixMax(){
+        return this.prixMax;
+    }
+    
+    public float getPrixMoyen(){
+        return (getPrixMin()+getPrixMax())/2;
+    }
+    
+    public float calculerValeurFonciere(){
+        float val = PRIX_DE_BASE;
+        for(int i=0;i<this.liste_lots.size();i++){
+            val = val + this.liste_lots.get(i).calculerValeurFonciere(this.type);
+        }
+        return arrondir(val); 
+    }
+    
+    public float calculerTaxeScolaire(float val){
+        return arrondir(val*TAXE_SCOLAIRE);
+    }
+    
+    public float calculerTaxeMunicipale(float val){
+        return arrondir(val*TAXE_MUNICIPALE);
+    }
+    
+    private float arrondir(float valeur){
+        float val = Math.round(valeur*100);
+        if((val%5)!=0) {
+            val = val + 5 -(val%5);
+        }
+        return val/100;
+    }
+}
