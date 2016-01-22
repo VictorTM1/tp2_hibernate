@@ -11,8 +11,9 @@
  * limitations under the License.
  */
 
-import java.io.FileReader;
-import org.json.*;
+//import java.io.FileReader;
+import net.sf.json.*;
+
 
 /**
  * @author ventilooo
@@ -23,7 +24,17 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        String inFile = "{}";
+        /*
+        try {
+            inFile = FileReader.loadFileIntoString(args[0], "utf-8");
+        } catch (Exception e){
+            System.out.println(e.toString());
+            //System.exit(1);
+        }*/
+        
+        JSONObject jso = JSONObject.fromObject(inFile);
         
     }
     
