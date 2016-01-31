@@ -10,7 +10,7 @@ import net.sf.json.*;
  * Classe permettant de parser le fichier JSON
  * Il y a de la place à l'amélioration
  * Pistes d'amélioration :
- * - Gérer plusieurs Terrain
+ * - Gérer plusieurs Terrains
  * - Optimisation du code
  * - ?
  *

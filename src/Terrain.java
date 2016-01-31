@@ -24,12 +24,18 @@ public class Terrain {
     int type;
     float prixMin, prixMax;
     ArrayList<Lot> liste_lots;
+    float valeurFonciereTotale;
+    float taxeScolaire;
+    float taxeMunicipale;
     
     public Terrain(){
         this.type = 0;
         this.prixMin = 0;
         this.prixMax = 0;
         this.liste_lots = new ArrayList<Lot>();
+        this.valeurFonciereTotale = 0;
+        this.taxeScolaire = 0;
+        this.taxeMunicipale = 0;
     }
     
     public Terrain(int type, float min, float max, ArrayList<Lot> lots){
@@ -59,20 +65,20 @@ public class Terrain {
         return (getPrixMin()+getPrixMax())/2;
     }
     
-    public float calculerValeurFonciere(){
+    public void calculerValeurFonciere(){
         float val = PRIX_DE_BASE;
         for(int i=0;i<this.liste_lots.size();i++){
             val = val + this.liste_lots.get(i).calculerValeurFonciere(this.type);
         }
-        return arrondir(val); 
+        this.valeurFonciereTotale = arrondir(val); 
     }
     
-    public float calculerTaxeScolaire(float val){
-        return arrondir(val*TAXE_SCOLAIRE);
+    public void calculerTaxeScolaire(float val){
+        this.taxeScolaire = arrondir(val*TAXE_SCOLAIRE);
     }
     
-    public float calculerTaxeMunicipale(float val){
-        return arrondir(val*TAXE_MUNICIPALE);
+    public void calculerTaxeMunicipale(float val){
+        this.taxeMunicipale = arrondir(val*TAXE_MUNICIPALE);
     }
     
     private float arrondir(float valeur){
