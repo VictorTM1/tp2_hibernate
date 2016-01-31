@@ -12,8 +12,9 @@
  */
 
 //import java.io.FileReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import net.sf.json.*;
-
 
 /**
  * @author ventilooo
@@ -23,19 +24,10 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
-        String inFile = "{}";
-        /*
-        try {
-            inFile = FileReader.loadFileIntoString(args[0], "utf-8");
-        } catch (Exception e){
-            System.out.println(e.toString());
-            //System.exit(1);
-        }*/
-        
-        JSONObject jso = JSONObject.fromObject(inFile);
-        
+    public static void main(String[] args) throws FileNotFoundException{
+       
+        Terrain terrain = jsonParser.parseJson("terrain.json");
+                    
     }
     
 }
