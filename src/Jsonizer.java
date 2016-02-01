@@ -62,19 +62,22 @@ public class Jsonizer {
         
         arrayOfcontent.add("{\n");
         
-        arrayOfcontent.add(KEY_WORD_TERRAIN[0] + "\"" + terrain.valeurFonciereTotale +"\",");
-        arrayOfcontent.add(KEY_WORD_TERRAIN[1] + "\"" + terrain.taxeScolaire + "\",");
-        arrayOfcontent.add(KEY_WORD_TERRAIN[2] + "\"" + terrain.taxeMunicipale + "\",");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[0] + "\"" + terrain.valeurFonciereTotale +"\",\n");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[1] + "\"" + terrain.taxeScolaire + "\",\n");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[2] + "\"" + terrain.taxeMunicipale + "\",\n");
         
         arrayOfcontent.add(KEY_WORD_TERRAIN[3] + "[\n");
         
         for (int i = 0; i < terrain.liste_lots.size(); i++) {
             arrayOfcontent.add("{\n");
-            arrayOfcontent.add(KEY_WORD_LOT[0] + "\"" + terrain.liste_lots.get(i).description + "\",");
+            arrayOfcontent.add(KEY_WORD_LOT[0] + "\"" + terrain.liste_lots.get(i).description + "\",\n");
             arrayOfcontent.add(KEY_WORD_LOT[1] + "\"" + terrain.liste_lots.get(i).valeurParLot + "$\"\n}");
+            
+            if ((i+1) < terrain.liste_lots.size()){
             arrayOfcontent.add(",\n");
+            }
         }
-        //arrayOfcontent.remove(terrain.liste_lots.size()-1);
+        
         arrayOfcontent.add("\n]\n}");
         
         return arrayOfcontent;
