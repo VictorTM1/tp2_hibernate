@@ -22,6 +22,7 @@ public class Lot {
     int nbDroitPassage, nbService;
     float superficie;
     Date dateMesure;
+    float valeurParLot;
     
     public Lot(){
         this.description = "";
@@ -29,6 +30,7 @@ public class Lot {
         this.nbService = 0;
         this.superficie = 0;
         this.dateMesure = new Date();
+        this.valeurParLot = 0;
     }
     
     public Lot(int service, int passage, float superficie, String desc, Date date){
@@ -37,6 +39,7 @@ public class Lot {
         this.nbService = service + 2;
         this.superficie = superficie;
         this.dateMesure = date;
+        valeurParLot = 0;
     }
     
     public float calculerValeurFonciere(float prix){

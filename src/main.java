@@ -14,6 +14,7 @@
 //import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import net.sf.json.*;
 
 /**
@@ -24,10 +25,11 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws IOException{
        
-        Terrain terrain = jsonParser.parseJson("terrain.json");
-                    
+        Terrain  test = new Terrain();
+        
+        Jsonizer.writeInJson(test);
     }
     
 }
