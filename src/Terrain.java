@@ -68,7 +68,7 @@ public class Terrain {
     public void calculerValeurFonciere(){
         float val = PRIX_DE_BASE;
         for(int i=0;i<this.liste_lots.size();i++){
-            val = val + this.liste_lots.get(i).calculerValeurFonciere(this.type);
+            val = val + this.liste_lots.get(i).calculerValeurFonciere(this.type, this.prixMin, this.prixMax);
         }
         this.valeurFonciereTotale = arrondir(val); 
     }

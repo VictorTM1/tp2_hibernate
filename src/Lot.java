@@ -42,11 +42,14 @@ public class Lot {
         valeurParLot = 0;
     }
     
-    public float calculerValeurFonciere(float prix){
-        return (this.superficie*prix);
+    public float calculerValeurFonciere(int type, float prixMin, float prixMax){
+        float valeurLot = calculerValeurSuperficie(type, prixMin, prixMax);
+        float valeurDroitPassage = calculerValeurDroitPassage(valeurLot, type);
+        float valeurServices = calculerValeurServices(type);
+        return (valeurLot + valeurDroitPassage + valeurServices);
     }
     
-    public float calcluerValeurDroitPassage(float prix, int type){
+    public float calculerValeurDroitPassage(float valeurLot, int type){
         float val = 500;
         float pourcent = 0;
         switch(type){
@@ -62,6 +65,56 @@ public class Lot {
             default : 
                 break;
         }
-        return (val - (this.nbDroitPassage*prix*pourcent));
+        return (val - (this.nbDroitPassage*valeurLot*pourcent));
+    }
+    
+    public float calculerValeurSuperficie(int type, float prixMin, float prixMax){
+        float prix = 0;
+        switch(type){
+            case 0 : 
+                prix = prixMin;                
+                break;
+            case 1 : 
+                prix = ((prixMin + prixMax)/2);
+                break;
+            case 2 : 
+                prix = prixMax;
+                break;
+            default : 
+                break;
+        }
+        return (this.superficie * prix);
+    }
+    
+    public float calculerValeurServices(int type){
+        float prix = 0;
+        switch(type){
+            case 0 : 
+                prix = 0;         
+                break;
+            case 1 : 
+                if(this.superficie <= 500){
+                    prix = 0;
+                }else if(this.superficie <= 10000){
+                    prix = 500 * this.nbService;
+                }else{
+                    prix = 1000 * this.nbService;
+                }
+                break;
+            case 2 : 
+                if(this.superficie <= 500){
+                    prix = 500;
+                }else {
+                    prix = 1500;
+                }
+                break;
+            default : 
+                break;
+        }
+        if(prix > 5000){
+            return 5000;
+        }else{
+            return prix;
+        }
     }
 }

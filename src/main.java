@@ -27,18 +27,15 @@ public class main {
      */
     public static void main(String[] args) throws IOException{
        
-        // cas de test pour le jsonizer
-        Terrain  test = new Terrain();
-        Lot lot1 = new Lot();
-        Lot lot2 = new Lot();
-        Lot lot3 = new Lot();
-        lot1.description = "YOLO";
-        lot2.description = "CQFD";
-        lot3.description = "Miel";
-        test.liste_lots.add(lot1);
-        test.liste_lots.add(lot2);
-        test.liste_lots.add(lot3);
-        Jsonizer.writeInJson(test);
+        if(args.length > 0){
+            Terrain ter  = jsonParser.parseJson(args[0]);
+
+            ter.calculerValeurFonciere();
+
+            Jsonizer.writeInJson(ter);
+        }else{
+            System.out.print("Erreur! le nom du fichier n'a pas ete specifier dans la ligne de commande");
+        }
     }
     
 }
