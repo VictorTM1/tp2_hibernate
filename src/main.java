@@ -21,13 +21,12 @@ import net.sf.json.*;
  * @author ventilooo
  */
 public class main {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
-       
         if(args.length > 0){
+            
             Terrain ter = jsonParser.parseJson(args[0]);
 
             for(int i=0;i<ter.liste_lots.size();i++){

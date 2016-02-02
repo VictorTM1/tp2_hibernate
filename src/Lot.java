@@ -51,16 +51,16 @@ public class Lot {
     
     public float calculerValeurDroitPassage(float valeurLot, int type){
         float val = 500;
-        float pourcent = 0;
+        float pourcent = 2;
         switch(type){
             case 0 : 
-                pourcent = 5/100;                
+                pourcent = (float)5/100;                
                 break;
             case 1 : 
-                pourcent = 10/100;
+                pourcent = (float)10/100;
                 break;
             case 2 : 
-                pourcent = 15/100;
+                pourcent = (float)15/100;
                 break;
             default : 
                 break;
@@ -103,9 +103,9 @@ public class Lot {
                 break;
             case 2 : 
                 if(this.superficie <= 500){
-                    prix = 500;
+                    prix = 500 * this.nbService;
                 }else {
-                    prix = 1500;
+                    prix = 1500 * this.nbService;
                 }
                 break;
             default : 
