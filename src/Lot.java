@@ -42,11 +42,11 @@ public class Lot {
         valeurParLot = 0;
     }
     
-    public float calculerValeurFonciere(int type, float prixMin, float prixMax){
+    public void calculerValeurFonciere(int type, float prixMin, float prixMax){
         float valeurLot = calculerValeurSuperficie(type, prixMin, prixMax);
         float valeurDroitPassage = calculerValeurDroitPassage(valeurLot, type);
         float valeurServices = calculerValeurServices(type);
-        return (valeurLot + valeurDroitPassage + valeurServices);
+        this.valeurParLot = (valeurLot + valeurDroitPassage + valeurServices);
     }
     
     public float calculerValeurDroitPassage(float valeurLot, int type){
