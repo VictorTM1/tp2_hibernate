@@ -1,19 +1,19 @@
 {
-"valeur_fonciere_total":"0.0",
-"taxe_scolaire":"0.0",
-"taxe_municipale":"0.0",
+"valeur_fonciere_total":"39893.80$",
+"taxe_scolaire":"478.75$",
+"taxe_municipale":"997.35$",
 "Lotissements":[
 {
-"description":"YOLO",
-"valeur_par_lot":"0.0$"
+"description":"Lot 1",
+"valeur_par_lot":"4255.00$"
 },
 {
-"description":"CQFD",
-"valeur_par_lot":"0.0$"
+"description":" Lot 2",
+"valeur_par_lot":"9574.00$"
 },
 {
-"description":"Miel",
-"valeur_par_lot":"0.0$"
+"description":"Lot 3",
+"valeur_par_lot":"25331.00$"
 }
 ]
 }
