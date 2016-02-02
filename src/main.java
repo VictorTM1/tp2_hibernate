@@ -21,17 +21,15 @@ import net.sf.json.*;
  * @author ventilooo
  */
 public class main {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
-       
         if(args.length > 0){
             Terrain ter  = jsonParser.parseJson(args[0]);
-
             ter.calculerValeurFonciere();
-
+            ter.calculerTaxeMunicipale(ter.valeurFonciereTotale);
+            ter.calculerTaxeScolaire(ter.valeurFonciereTotale);
             Jsonizer.writeInJson(ter);
         }else{
             System.out.print("Erreur! le nom du fichier n'a pas ete specifier dans la ligne de commande");
