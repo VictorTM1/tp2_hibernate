@@ -38,7 +38,6 @@ public class Jsonizer {
         }
         return jsonfile;
     }
-    
     // Ecriture du json.
     public static void writeInJson(Terrain terrain) {
         try {
@@ -52,7 +51,8 @@ public class Jsonizer {
         bufferedWriter.close();    
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }        
+        }
+        
     }
 
     // retourne une collection de String regroupant les information pour le generation de resultat.json
@@ -62,16 +62,16 @@ public class Jsonizer {
         
         arrayOfcontent.add("{\n");
         
-        arrayOfcontent.add(KEY_WORD_TERRAIN[0] + "\"" + String.format("%.2f", terrain.valeurFonciereTotale) +"$\",\n");
-        arrayOfcontent.add(KEY_WORD_TERRAIN[1] + "\"" + String.format("%.2f", terrain.taxeScolaire) + "$\",\n");
-        arrayOfcontent.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f", terrain.taxeMunicipale) + "$\",\n");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[0] + "\"" + terrain.valeurFonciereTotale +"\",\n");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[1] + "\"" + terrain.taxeScolaire + "\",\n");
+        arrayOfcontent.add(KEY_WORD_TERRAIN[2] + "\"" + terrain.taxeMunicipale + "\",\n");
         
         arrayOfcontent.add(KEY_WORD_TERRAIN[3] + "[\n");
         
         for (int i = 0; i < terrain.liste_lots.size(); i++) {
             arrayOfcontent.add("{\n");
             arrayOfcontent.add(KEY_WORD_LOT[0] + "\"" + terrain.liste_lots.get(i).description + "\",\n");
-            arrayOfcontent.add(KEY_WORD_LOT[1] + "\"" + String.format("%.2f", terrain.liste_lots.get(i).valeurParLot) + "$\"\n}");
+            arrayOfcontent.add(KEY_WORD_LOT[1] + "\"" + terrain.liste_lots.get(i).valeurParLot + "$\"\n}");
             
             if ((i+1) < terrain.liste_lots.size()){
             arrayOfcontent.add(",\n");

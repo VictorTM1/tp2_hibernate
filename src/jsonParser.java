@@ -73,7 +73,7 @@ public class jsonParser {
     
     // Crée le tableau de lotissements
     public static ArrayList<Lot> getLotissements(){
-        ArrayList<Lot> lotissements = new ArrayList<Lot>();
+        ArrayList<Lot> lotissements = new ArrayList<>();
         JSONArray lotissement = json.getJSONArray("Lotissements");
         for(int i = 0; i < lotissement.size(); i++){
             lotissements.add(creerLotissement(i, lotissement));
