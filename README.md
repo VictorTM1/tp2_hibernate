@@ -14,7 +14,7 @@ Backlog Préliminaire:
 	* [x] Récupérée les donnés associé.
 	* [x] Géneré un Json de sortie avec les donnée.
 * Calcul des Données
-	* [ ] le montant de la valeur du lot selon la superficie et le prix du m2 pour le lot en question.
+	* [x] le montant de la valeur du lot selon la superficie et le prix du m2 pour le lot en question.
 	* [x] le montant pour les droits de passage.
 	* [x] le montant pour les services.
 * Génération du Json de sortie
