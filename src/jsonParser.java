@@ -37,15 +37,16 @@ public class jsonParser {
     // Parse le Json et retourne le premier Terrain
     public static Terrain parseJson(String fileName){
         String jsonString;
-        try{
-            jsonString = jsonParser.jsonToString(fileName);
+        Terrain terrain;
+        jsonString = jsonParser.jsonToString(fileName);
+        if(jsonString != null){
+            json = JSONObject.fromObject(jsonString);
+            terrain = creerTerrain();
+            return terrain;
         }
-        catch(Exception e){
+        else{
             return null;
         }
-        json = JSONObject.fromObject(jsonString);
-        Terrain terrain = creerTerrain();
-        return terrain;
     }
     
     // Transforme le .json en String

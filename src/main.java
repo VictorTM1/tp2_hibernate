@@ -26,18 +26,21 @@ public class main {
      */
     public static void main(String[] args) throws IOException{
         if(args.length > 0){
-            
             Terrain ter = jsonParser.parseJson(args[0]);
-
-            for(int i=0;i<ter.liste_lots.size();i++){
+            if(ter != null){
+                for(int i=0;i<ter.liste_lots.size();i++){
                 ter.liste_lots.get(i).calculerValeurFonciere(ter.getType(), ter.prixMin, ter.prixMax);
-            }
-            
-            ter.calculerValeurFonciere();
-            ter.calculerTaxeScolaire();
-            ter.calculerTaxeMunicipale();
+                }
 
-            Jsonizer.writeInJson(ter, args[1]);
+                ter.calculerValeurFonciere();
+                ter.calculerTaxeScolaire();
+                ter.calculerTaxeMunicipale();
+
+                Jsonizer.writeInJson(ter, args[1]);
+            }
+            else{
+                System.out.println("Erreur avec le fichier d'entrée !");
+            }
         }else{
             System.out.println("Erreur! le nom du fichier n'a pas ete specifier dans la ligne de commande");
         }
