@@ -26,8 +26,8 @@ public class Jsonizer {
     private static final String[] KEY_WORD_LOT = {"\"description\":","\"valeur_par_lot\":"};
 
     // Creation du json file.
-    public static File createJsonFile(){
-        File jsonfile = new File("resultat.json");
+    public static File createJsonFile(String sortieName){
+        File jsonfile = new File(sortieName);
         try {
             if (!jsonfile.exists()) {
                 jsonfile.createNewFile();
@@ -40,9 +40,9 @@ public class Jsonizer {
     }
     
     // Ecriture du json.
-    public static void writeInJson(Terrain terrain) {
+    public static void writeInJson(Terrain terrain, String sortieName) {
         try {
-        File jsonfile = createJsonFile();
+        File jsonfile = createJsonFile(sortieName);
         FileWriter fileWriter = new FileWriter(jsonfile.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 

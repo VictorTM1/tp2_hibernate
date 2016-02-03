@@ -37,7 +37,7 @@ public class main {
             ter.calculerTaxeScolaire();
             ter.calculerTaxeMunicipale();
 
-            Jsonizer.writeInJson(ter);
+            Jsonizer.writeInJson(ter, args[1]);
         }else{
             System.out.println("Erreur! le nom du fichier n'a pas ete specifier dans la ligne de commande");
         }
