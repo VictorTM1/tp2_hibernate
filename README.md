@@ -8,7 +8,7 @@ INF2015 Projet de session – Hiver 2016 [TEAM18]
 *  Carlos Nossa  [NOSC06018807] Github: dvmedellin
 
 Backlog Partie [1]:
----------------------
+-------------------
 
 * Jsonizer
 	* [x] Récupérée les donnés associé.
@@ -22,3 +22,6 @@ Backlog Partie [1]:
 	* [x] Géneré le Json de sortie avec les donné associé.
     
 ## [Backlog Trello](https://trello.com/b/uZq6ddwg)
+
+Backlog Partie [2]:
+-------------------
