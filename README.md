@@ -1,5 +1,6 @@
 INF2015 Projet de session – Hiver 2016 [TEAM18]
-============================================
+===============================================
+##### [Backlog Trello](https://trello.com/b/uZq6ddwg)
 
 ### Membre du Groupe :
 *  Istvan SZALAI [SZAI29079604] Github: ventilooo
@@ -20,8 +21,6 @@ Backlog Partie [1]:
 * Génération du Json de sortie
 	* [x] Récupérée les donnés associé.
 	* [x] Géneré le Json de sortie avec les donné associé.
-    
-## [Backlog Trello](https://trello.com/b/uZq6ddwg)
 
 Backlog Partie [2]:
 -------------------
