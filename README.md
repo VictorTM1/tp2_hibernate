@@ -7,7 +7,7 @@ INF2015 Projet de session – Hiver 2016 [TEAM18]
 *  Victor        [TRUV04069307] Github: VictorTM1 
 *  Carlos Nossa  [NOSC06018807] Github: dvmedellin
 
-Backlog Préliminaire:
+Backlog Partie [1]:
 ---------------------
 
 * Jsonizer
@@ -21,4 +21,4 @@ Backlog Préliminaire:
 	* [x] Récupérée les donnés associé.
 	* [x] Géneré le Json de sortie avec les donné associé.
     
-[Backlog Trello](https://trello.com/b/uZq6ddwg)
+## [Backlog Trello](https://trello.com/b/uZq6ddwg)
