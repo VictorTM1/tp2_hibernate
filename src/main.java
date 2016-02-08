@@ -36,7 +36,7 @@ public class main {
                 ter.calculerTaxeScolaire();
                 ter.calculerTaxeMunicipale();
 
-                Jsonizer.writeInJson(ter, args[1]);
+                Jsonizer.Jsonize(ter, args[1]);
             }
             else{
                 System.out.println("Erreur avec le fichier d'entrée !");
