@@ -3,10 +3,6 @@
 
 Coding Standard
 
- 
-
-This document contains the coding conventions created by the GUI Hangman team, based on the Java language coding standards presented in the Java Language Specification, from Sun Microsystems, Inc. 
-
 File Names
 
 As in the Java language coding standards, source files have the .java extension and complied bytecode files have the .class extension.. 
