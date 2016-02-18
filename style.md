@@ -34,7 +34,7 @@ The first non-comment line of most Java source files is a package statement. Aft
 
 All source files should contain a comment that lists the class name, inheritance, attributes, methods, functionality, visibility, requirement number and the statement which declares the class.
 
--------------------------------
+-----------------------------------
 
  *  Class name:
 
@@ -50,15 +50,13 @@ All source files should contain a comment that lists the class name, inheritance
 
              *  From requirement number
 
-             *******************************************************/
-
-            public class ClassName
+             * public class ClassName
 
 ### Method Headers and Declarations
 
 Every method included in a class should contain a comment that lists the method name, inheritance, attributes, precondition, postcondition, functionality, visibility, @param, @return, and requirement number which it supports, if any.
 
-/*******************************************************
+-----------------------------------
 
  *  Method name:
 
@@ -80,7 +78,7 @@ Every method included in a class should contain a comment that lists the method 
 
              *  From requirement number  
 
-             *******************************************************/
+-----------------------------------
 
 ### Indentation
 
