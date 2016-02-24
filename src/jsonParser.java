@@ -95,6 +95,7 @@ public class jsonParser {
     
     // Extirpe un Float d'un String
     public static float getFloat(String prix){
+        prix = prix.replace(',', '.');
         float lePrix = Float.valueOf(prix.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
         return lePrix;
     }
