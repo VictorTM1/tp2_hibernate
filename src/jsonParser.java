@@ -31,16 +31,14 @@ public class jsonParser {
     // Parse le Json et retourne le premier Terrain
     public static Terrain parseJson(String fileName){
         String jsonString;
-        Terrain terrain;
         jsonString = jsonParser.jsonToString(fileName);
         if(jsonString != null){
-            //System.out.println(jsonString);
             json = JSONObject.fromObject(jsonString);
             formatJSONKeys(json);
-            //System.out.println(json);
-            if (validateJSONTerrain()) System.out.println("valide :)");
-            terrain = creerTerrain();
-            return terrain;
+            if (validateJSONTerrain()) 
+                return creerTerrain();
+            else
+                return null;
         }
         else{
             return null;
@@ -93,6 +91,7 @@ public class jsonParser {
     
     // Extirpe un Float d'un String
     public static float getFloat(String prix){
+        prix = prix.replace(',', '.');
         float lePrix = Float.valueOf(prix.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
         return lePrix;
     }

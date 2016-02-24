@@ -22,66 +22,66 @@ public class Terrain {
     private static final float TAXE_MUNICIPALE = 0.025f; //1.2%
     
     int type;
-    float prixMin, prixMax;
-    ArrayList<Lot> liste_lots;
-    float valeurFonciereTotale;
-    float taxeScolaire;
-    float taxeMunicipale;
+    float priceMin, priceMax;
+    ArrayList<Lot> list_lots;
+    float totalLandValue;
+    float schoolTax;
+    float municipalTax;
     
     public Terrain(){
         this.type = 0;
-        this.prixMin = 0;
-        this.prixMax = 0;
-        this.liste_lots = new ArrayList<Lot>();
-        this.valeurFonciereTotale = 0;
-        this.taxeScolaire = 0;
-        this.taxeMunicipale = 0;
+        this.priceMin = 0;
+        this.priceMax = 0;
+        this.list_lots = new ArrayList<Lot>();
+        this.totalLandValue = 0;
+        this.schoolTax = 0;
+        this.municipalTax = 0;
     }
     
     public Terrain(int type, float min, float max, ArrayList<Lot> lots){
         this.type = type;
-        this.prixMin = min;
-        this.prixMax = max;
-        this.liste_lots=lots;
+        this.priceMin = min;
+        this.priceMax = max;
+        this.list_lots=lots;
     }
     
     public ArrayList<Lot> getListeLots(){
-        return this.liste_lots;
+        return this.list_lots;
     }
     
     public int getType(){
         return this.type;
     }
     
-    public float getPrixMin(){
-        return this.prixMin;
+    public float getPriceMin(){
+        return this.priceMin;
     }
     
-    public float getPrixMax(){
-        return this.prixMax;
+    public float getPriceMax(){
+        return this.priceMax;
     }
     
-    public float getPrixMoyen(){
-        return (getPrixMin()+getPrixMax())/2;
+    public float getAveragePrice(){
+        return (getPriceMin()+getPriceMax())/2;
     }
     
-    public void calculerValeurFonciere(){
+    public void calculateLandValue(){
         float val = PRIX_DE_BASE;
-        for(int i=0;i<this.liste_lots.size();i++){
-            val = val + this.liste_lots.get(i).valeurParLot;
+        for(int i=0;i<this.list_lots.size();i++){
+            val = val + this.list_lots.get(i).valuePerLot;
         }
-        this.valeurFonciereTotale = arrondir(val); 
+        this.totalLandValue = round(val); 
     }
     
-    public void calculerTaxeScolaire(){
-        this.taxeScolaire = arrondir(this.valeurFonciereTotale*TAXE_SCOLAIRE);
+    public void calculateSchoolTax(){
+        this.schoolTax = round(this.totalLandValue*TAXE_SCOLAIRE);
     }
     
-    public void calculerTaxeMunicipale(){
-        this.taxeMunicipale = arrondir(this.valeurFonciereTotale*TAXE_MUNICIPALE);
+    public void calculateMunicipalTax(){
+        this.municipalTax = round(this.totalLandValue*TAXE_MUNICIPALE);
     }
     
-    private float arrondir(float valeur){
+    private float round(float valeur){
         float val = Math.round(valeur*100);
         if((val%5)!=0) {
             val = val + 5 -(val%5);

@@ -66,11 +66,11 @@ public class Jsonizer {
     }
     
     public static void loadLotsData (ArrayList<String> array,Terrain terrain){
-        for (int i = 0; i < terrain.liste_lots.size(); i++) {
+        for (int i = 0; i < terrain.list_lots.size(); i++) {
             array.add("{\n");
-            array.add(KEY_WORD_LOT[0] + "\"" + terrain.liste_lots.get(i).description + "\",\n");
-            array.add(KEY_WORD_LOT[1] + "\"" + String.format("%.2f", terrain.liste_lots.get(i).valeurParLot) + "$\"\n}");
-            if ((i+1) < terrain.liste_lots.size()){
+            array.add(KEY_WORD_LOT[0] + "\"" + terrain.list_lots.get(i).description + "\",\n");
+            array.add(KEY_WORD_LOT[1] + "\"" + String.format("%.2f", terrain.list_lots.get(i).valuePerLot) + "$\"\n}");
+            if ((i+1) < terrain.list_lots.size()){
             array.add(",\n");
             }
         }
@@ -79,9 +79,9 @@ public class Jsonizer {
     
     public static void loadTerrainData (ArrayList<String> array, Terrain terrain){
         array.add("{\n");
-        array.add(KEY_WORD_TERRAIN[0] + "\"" + String.format("%.2f", terrain.valeurFonciereTotale) +"$\",\n");
-        array.add(KEY_WORD_TERRAIN[1] + "\"" + String.format("%.2f", terrain.taxeScolaire) + "$\",\n");
-        array.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f", terrain.taxeMunicipale) + "$\",\n");
+        array.add(KEY_WORD_TERRAIN[0] + "\"" + String.format("%.2f", terrain.totalLandValue) +"$\",\n");
+        array.add(KEY_WORD_TERRAIN[1] + "\"" + String.format("%.2f", terrain.schoolTax) + "$\",\n");
+        array.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f", terrain.municipalTax) + "$\",\n");
         array.add(KEY_WORD_TERRAIN[3] + "[\n");
     }
     
