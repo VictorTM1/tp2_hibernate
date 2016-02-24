@@ -19,102 +19,91 @@ import java.util.Date;
  */       
 public class Lot {
     String description;
-    int nbDroitPassage, nbService;
-    float superficie;
-    Date dateMesure;
-    float valeurParLot;
+    int nbAccess, nbService;
+    float surfaceArea;
+    Date dateMeasured;
+    float valuePerLot;
     
     public Lot(){
         this.description = "";
-        this.nbDroitPassage = 0;
+        this.nbAccess = 0;
         this.nbService = 0;
-        this.superficie = 0;
-        this.dateMesure = new Date();
-        this.valeurParLot = 0;
+        this.surfaceArea = 0;
+        this.dateMeasured = new Date();
+        this.valuePerLot = 0;
     }
     
-    public Lot(int service, int passage, float superficie, String desc, Date date){
+    public Lot(int service, int access, float surfaceArea, String desc, Date date){
         this.description = desc;
-        this.nbDroitPassage = passage;
+        this.nbAccess = access;
         this.nbService = service + 2;
-        this.superficie = superficie;
-        this.dateMesure = date;
-        valeurParLot = 0;
+        this.surfaceArea = surfaceArea;
+        this.dateMeasured = date;
+        valuePerLot = 0;
     }
     
-    public void calculerValeurFonciere(int type, float prixMin, float prixMax){
-        float valeurLot = calculerValeurSuperficie(type, prixMin, prixMax);
-        float valeurDroitPassage = calculerValeurDroitPassage(valeurLot, type);
-        float valeurServices = calculerValeurServices(type);
-        this.valeurParLot = (valeurLot + valeurDroitPassage + valeurServices);
+    public void calculateLandValueLot(int type, float priceMin, float priceMax){
+        float valueLot = calculateValueSurfaceArea(type, priceMin, priceMax);
+        float valueAccess = calculateValueAccess(valueLot, type);
+        float valueServices = calculateValueServices(type);
+        this.valuePerLot = (valueLot + valueAccess + valueServices);
     }
     
-    public float calculerValeurDroitPassage(float valeurLot, int type){
+    public float calculateValueAccess(float valueLot, int type){
         float val = 500;
-        float pourcent = 2;
-        switch(type){
-            case 0 : 
-                pourcent = (float)5/100;                
-                break;
-            case 1 : 
-                pourcent = (float)10/100;
-                break;
-            case 2 : 
-                pourcent = (float)15/100;
-                break;
-            default : 
-                break;
-        }
-        return (val - (this.nbDroitPassage*valeurLot*pourcent));
+        float percent = (float)( 5 *( type + 1) ) / 100;
+        return (val - (this.nbAccess*valueLot*percent));
     }
     
-    public float calculerValeurSuperficie(int type, float prixMin, float prixMax){
-        float prix = 0;
-        switch(type){
-            case 0 : 
-                prix = prixMin;                
-                break;
-            case 1 : 
-                prix = ((prixMin + prixMax)/2);
-                break;
-            case 2 : 
-                prix = prixMax;
-                break;
-            default : 
-                break;
-        }
-        return (this.superficie * prix);
+    public float calculateValueSurfaceArea(int type, float priceMin, float priceMax){
+        float prix = calculatePriceSurfaceByType(type, priceMin, priceMax);
+        return (this.surfaceArea * prix);
     }
     
-    public float calculerValeurServices(int type){
-        float prix = 0;
-        switch(type){
-            case 0 : 
-                prix = 0;         
-                break;
-            case 1 : 
-                if(this.superficie <= 500){
-                    prix = 0;
-                }else if(this.superficie <= 10000){
-                    prix = 500 * this.nbService;
-                }else{
-                    prix = 1000 * this.nbService;
-                }
-                break;
-            case 2 : 
-                if(this.superficie <= 500){
-                    prix = 500 * this.nbService;
-                }else {
-                    prix = 1500 * this.nbService;
-                }
-                break;
-            default : 
-                break;
+    public float calculatePriceSurfaceByType(int type, float priceMin, float priceMax){
+        if( type == 0){
+            return priceMin;
+        }else if(type == 1){
+            return ((priceMin + priceMax)/2);
+        }else{
+            return priceMax;
         }
+    }
+    
+    public float calculateValueServices(int type){
+        float prix = calculatePriceServiceByType(type);
         if(prix > 5000){
             return 5000;
         }else{
             return prix;
+        }
+    }
+    
+    public float calculatePriceServiceByType(int type){
+        if(type == 0){
+            return 0;
+        }else if(type == 1){
+            return calculateValueServicesType1();
+        }else{
+            return calculateValueServicesType2();
+        }
+    }
+    
+    public float calculateValueServicesType1(){
+        if(this.surfaceArea <= 500){
+            return 0;
+        }else if(this.surfaceArea <= 10000){
+            return 500 * this.nbService;
+        }else{
+            return 1000 * this.nbService;
+        }
+    }
+    
+    public float calculateValueServicesType2(){
+        if(this.surfaceArea <= 500){
+            return 500 * this.nbService;
+        }else {
+            return 1500 * this.nbService;
         }
     }
 }

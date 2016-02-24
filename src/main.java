@@ -28,13 +28,13 @@ public class main {
         if(args.length > 0){
             Terrain ter = jsonParser.parseJson(args[0]);
             if(ter != null){
-                for(int i=0;i<ter.liste_lots.size();i++){
-                ter.liste_lots.get(i).calculerValeurFonciere(ter.getType(), ter.prixMin, ter.prixMax);
+                for(int i=0;i<ter.list_lots.size();i++){
+                ter.list_lots.get(i).calculateLandValueLot(ter.getType(), ter.priceMin, ter.priceMax);
                 }
 
-                ter.calculerValeurFonciere();
-                ter.calculerTaxeScolaire();
-                ter.calculerTaxeMunicipale();
+                ter.calculateLandValue();
+                ter.calculateSchoolTax();
+                ter.calculateMunicipalTax();
 
                 Jsonizer.Jsonize(ter, args[1]);
             }
