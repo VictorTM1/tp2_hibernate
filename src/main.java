@@ -25,6 +25,7 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
+        System.out.println(args[0]);
         if(args.length > 0){
             Terrain ter = jsonParser.parseJson(args[0]);
             if(ter != null){

@@ -14,19 +14,11 @@
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 import net.sf.json.*;
 
 /*
- * Classe permettant de parser le fichier JSON
- * Il y a de la place à l'amélioration
- * Pistes d'amélioration :
- * - Gérer plusieurs Terrains
- * - Optimisation du code
- * - ?
- *
+ * Classe permettant de parser le fichier JSON *
  * ---------------------
  * @author robeen      |
  * ---------------------
@@ -40,7 +32,9 @@ public class jsonParser {
         Terrain terrain;
         jsonString = jsonParser.jsonToString(fileName);
         if(jsonString != null){
+            //System.out.println(jsonString);
             json = JSONObject.fromObject(jsonString);
+            if (validate()) System.out.println("valide :)");
             terrain = creerTerrain();
             return terrain;
         }
@@ -110,4 +104,30 @@ public class jsonParser {
         }
         return new Date();
     }
+    
+    private static boolean validate(){
+        String[] clesTerrain = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
+        String[] cles_lot = {"description","nombre_droits_passage"," nombre_services"," Superficie","date_mesure"};
+        for (String cle : clesTerrain){
+            if (!json.has(cle) ){
+                return false;
+            } 
+        }
+        /*for (Object object : json.getJSONArray("lotissement")){
+            for (String cle : cles_lot){
+                if (!object.has(cle) ){
+                    return false;
+                } 
+            }
+        }*/
+        return true;
+    }
+
+    private static class Arraylist extends ArrayList<String> {
+
+        public Arraylist(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
 }
+
