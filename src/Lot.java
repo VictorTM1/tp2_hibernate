@@ -33,8 +33,9 @@ public class Lot {
         this.valuePerLot = 0;
     }
     
-    public Lot(int service, int access, float surfaceArea, String desc, Date date){
-        this.description = desc;
+    public Lot(int service, int access, float surfaceArea, String description,
+            Date date){
+        this.description = description;
         this.nbAccess = access;
         this.nbService = service + 2;
         this.surfaceArea = surfaceArea;
@@ -55,12 +56,14 @@ public class Lot {
         return (val - (this.nbAccess*valueLot*percent));
     }
     
-    public float calculateValueSurfaceArea(int type, float priceMin, float priceMax){
-        float prix = calculatePriceSurfaceByType(type, priceMin, priceMax);
-        return (this.surfaceArea * prix);
+    public float calculateValueSurfaceArea(int type, float priceMin, 
+            float priceMax){
+        float price = calculatePriceSurfaceByType(type, priceMin, priceMax);
+        return (this.surfaceArea * price);
     }
     
-    public float calculatePriceSurfaceByType(int type, float priceMin, float priceMax){
+    public float calculatePriceSurfaceByType(int type, float priceMin,
+            float priceMax){
         if( type == 0){
             return priceMin;
         }else if(type == 1){

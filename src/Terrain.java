@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @author dvmedellin
  */
 public class Terrain {
-    private static final float PRIX_DE_BASE = 733.77f;    
-    private static final float TAXE_SCOLAIRE = 0.012f; //1.2%
-    private static final float TAXE_MUNICIPALE = 0.025f; //1.2%
+    private static final float BASIC_PRICE = 733.77f;    
+    private static final float SCHOLAR_TAX = 0.012f; //1.2%
+    private static final float MUNICIPAL_TAX = 0.025f; //1.2%
     
     int type;
     float priceMin, priceMax;
@@ -42,7 +42,7 @@ public class Terrain {
         this.type = type;
         this.priceMin = min;
         this.priceMax = max;
-        this.list_lots=lots;
+        this.list_lots = lots;
     }
     
     public ArrayList<Lot> getListeLots(){
@@ -66,25 +66,25 @@ public class Terrain {
     }
     
     public void calculateLandValue(){
-        float val = PRIX_DE_BASE;
-        for(int i=0;i<this.list_lots.size();i++){
+        float val = BASIC_PRICE;
+        for(int i = 0 ; i < this.list_lots.size(); i++){
             val = val + this.list_lots.get(i).valuePerLot;
         }
         this.totalLandValue = round(val); 
     }
     
     public void calculateSchoolTax(){
-        this.schoolTax = round(this.totalLandValue*TAXE_SCOLAIRE);
+        this.schoolTax = round(this.totalLandValue*SCHOLAR_TAX);
     }
     
     public void calculateMunicipalTax(){
-        this.municipalTax = round(this.totalLandValue*TAXE_MUNICIPALE);
+        this.municipalTax = round(this.totalLandValue*MUNICIPAL_TAX);
     }
     
-    private float round(float valeur){
-        float val = Math.round(valeur*100);
-        if((val%5)!=0) {
-            val = val + 5 -(val%5);
+    private float round(float value){
+        float val = Math.round(value*100);
+        if((val%5) != 0) {
+            val = val + 5 - (val % 5);
         }
         return val/100;
     }

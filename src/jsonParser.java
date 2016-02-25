@@ -25,8 +25,10 @@ import net.sf.json.*;
  */
 public class jsonParser {
     private static JSONObject json;
-    private static final String[] terrainKeys = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
-    private static final String[] lotKeys = {"description","nombre_droits_passage","nombre_services","superficie","date_mesure"};
+    private static final String[] terrainKeys = {"type_terrain","prix_m2_min",
+        "prix_m2_max","lotissements"};
+    private static final String[] lotKeys = {"description","nombre_droits_passa"
+            + "ge","nombre_services","superficie","date_mesure"};
     
     // Parse the input Json file and return the first Terrain
     public static Terrain parseJson(String fileName){
@@ -86,14 +88,16 @@ public class jsonParser {
         int nbServices = jsonLotissement.getInt("nombre_services");
         float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
-        return new Lot(nbServices, nbDroitsPassage, superficie, description, lotDate);
+        return new Lot(nbServices, nbDroitsPassage, superficie, description,
+                lotDate);
     }
     
     // Get float from a string
-    public static float getFloat(String prix){
-        prix = prix.replace(',', '.');
-        float lePrix = Float.valueOf(prix.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
-        return lePrix;
+    public static float getFloat(String price){
+        price = price.replace(',', '.');
+        float thePrice = Float.valueOf(price.replaceAll("[^\\d.]+|\\.(?!\\d)",
+                ""));
+        return thePrice;
     }
     
     // Create a date object coming from a string formatted as such : "yyyy-MM-dd"
@@ -112,10 +116,12 @@ public class jsonParser {
         JSONObject object2 = JSONObject.fromObject(object);
         Iterator jsonCles = object2.keys();
         while (jsonCles.hasNext()){
-            String cle=jsonCles.next().toString();
+            String cle = jsonCles.next().toString();
             Object subObject = object2.get(cle);
-            if ( subObject instanceof JSONArray ) formatJSONKeys((JSONArray) subObject);
-            if ( subObject instanceof JSONObject ) formatJSONKeys((JSONObject) subObject);
+            if ( subObject instanceof JSONArray ) formatJSONKeys((JSONArray)
+                    subObject);
+            if ( subObject instanceof JSONObject ) formatJSONKeys((JSONObject)
+                    subObject);
             object.discard(cle);
             object.put(cle.trim().toLowerCase(), subObject);            
         }
@@ -125,13 +131,14 @@ public class jsonParser {
         Iterator iterator = objects.iterator();
         while (iterator.hasNext()){
             Object object = iterator.next();
-            if ( object instanceof JSONObject ) formatJSONKeys((JSONObject) object);
+            if ( object instanceof JSONObject ) formatJSONKeys((JSONObject)
+                    object);
         }
     }
     
     private static boolean validateJSONTerrain(){
-        for (String cle : terrainKeys){
-            if (!json.has(cle)) return false;
+        for (String key : terrainKeys){
+            if (!json.has(key)) return false;
         }       
         return validateJSONLots();
     }
@@ -142,8 +149,8 @@ public class jsonParser {
         Iterator iteratorArray = object.iterator();
         while (iteratorArray.hasNext()){
             JSONObject object2 = (JSONObject) iteratorArray.next();
-            for (String cle : lotKeys){
-                if ( !object2.has(cle) ) return false;
+            for (String key : lotKeys){
+                if ( !object2.has(key) ) return false;
             }
         }        
         return true;

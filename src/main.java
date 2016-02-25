@@ -11,7 +11,6 @@
  * limitations under the License.
  */
 
-//import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,23 +25,24 @@ public class main {
      */
     public static void main(String[] args) throws IOException{
         if(args.length > 0){
-            Terrain ter = jsonParser.parseJson(args[0]);
-            if(ter != null){
-                for(int i=0;i<ter.list_lots.size();i++){
-                ter.list_lots.get(i).calculateLandValueLot(ter.getType(), ter.priceMin, ter.priceMax);
+            Terrain terrains = jsonParser.parseJson(args[0]);
+            if(terrains != null){
+                for(int i = 0; i < terrains.list_lots.size() ; i++){
+                terrains.list_lots.get(i).calculateLandValueLot(
+                        terrains.getType(), terrains.priceMin, 
+                        terrains.priceMax);
                 }
-
-                ter.calculateLandValue();
-                ter.calculateSchoolTax();
-                ter.calculateMunicipalTax();
-
-                Jsonizer.Jsonize(ter, args[1]);
+                terrains.calculateLandValue();
+                terrains.calculateSchoolTax();
+                terrains.calculateMunicipalTax();
+                Jsonizer.Jsonize(terrains, args[1]);
             }
             else{
                 System.out.println("Error with the input file !");
             }
         }else{
-            System.out.println("Error ! The input file was not specified in the command line when the program was run.");
+            System.out.println("Error ! The input file was not specified in the"
+                    + " command line when the program was run.");
         }
         
     }
