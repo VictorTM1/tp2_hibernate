@@ -2,7 +2,7 @@
  "type_terrain":2,
  "prix_m2_min":"3,45 $",
  "prix_m2_max":"7,00 $",
- "Lotissements":[
+ "lotissements":[
  {
  "description":"Lot 1",
  "nombre_droits_passage":4,

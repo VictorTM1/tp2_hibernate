@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Jsonizer {
 
     private static final String[] KEY_WORD_TERRAIN = {"\"valeur_fonciere_total\":","\"taxe_scolaire\":"
-            ,"\"taxe_municipale\":","\"Lotissements\":"};
+            ,"\"taxe_municipale\":","\"lotissements\":"};
     private static final String[] KEY_WORD_LOT = {"\"description\":","\"valeur_par_lot\":"};
 
     // Creation du json file.
