@@ -36,7 +36,7 @@ public class Jsonizer {
             + "négatif.","La superficie est négative.","La superficie est supér"
             + "ieur à 50000 m2."};
 
-    // Creation du json file.
+    // Json file creation.
     public static File createJsonFile(String sortieName){
         File jsonfile = new File(sortieName);
         try {
@@ -69,8 +69,8 @@ public class Jsonizer {
         bufferedWriter.close();    
     }
     
-    // retourne une collection de String regroupant les information pour le 
-    // generation de resultat.json
+    // return a string collection with all information needed to generate 
+    // resulat.json
     public static ArrayList<String> createJsonContent(Terrain terrain) {
         ArrayList<String> arrayOfContent = new ArrayList<>();
         loadTerrainData(arrayOfContent, terrain);
