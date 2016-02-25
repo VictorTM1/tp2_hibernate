@@ -25,8 +25,8 @@ import net.sf.json.*;
  */
 public class jsonParser {
     private static JSONObject json;
-    private static final String[] clesTerrain = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
-    private static final String[] clesLot = {"description","nombre_droits_passage","nombre_services","superficie","date_mesure"};
+    private static final String[] terrainKeys = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
+    private static final String[] lotKeys = {"description","nombre_droits_passage","nombre_services","superficie","date_mesure"};
     
     // Parse the input Json file and return the first Terrain
     public static Terrain parseJson(String fileName){
@@ -36,7 +36,7 @@ public class jsonParser {
             json = JSONObject.fromObject(jsonString);
             formatJSONKeys(json);
             if (validateJSONTerrain()) 
-                return creerTerrain();
+                return createTerrain();
             else
                 return null;
         }
@@ -59,7 +59,7 @@ public class jsonParser {
     }
     
     // Create the Terrain
-    public static Terrain creerTerrain(){
+    public static Terrain createTerrain(){
         int type = json.getInt("type_terrain");
         float prixMin = getFloat(json.getString("prix_m2_min"));
         float prixMax = getFloat(json.getString("prix_m2_max"));
@@ -73,13 +73,13 @@ public class jsonParser {
         ArrayList<Lot> lotissements = new ArrayList<Lot>();
         JSONArray lotissement = json.getJSONArray("lotissements");
         for(int i = 0; i < lotissement.size(); i++){
-            lotissements.add(creerLotissement(i, lotissement));
+            lotissements.add(createLotissement(i, lotissement));
         }
         return lotissements;
     }
     
     // Create a lotissement
-    public static Lot creerLotissement(int index, JSONArray jsonLotissements){
+    public static Lot createLotissement(int index, JSONArray jsonLotissements){
         JSONObject jsonLotissement = jsonLotissements.getJSONObject(index);
         String description = jsonLotissement.getString("description");
         int nbDroitsPassage = jsonLotissement.getInt("nombre_droits_passage");
@@ -130,7 +130,7 @@ public class jsonParser {
     }
     
     private static boolean validateJSONTerrain(){
-        for (String cle : clesTerrain){
+        for (String cle : terrainKeys){
             if (!json.has(cle)) return false;
         }       
         return validateJSONLots();
@@ -142,7 +142,7 @@ public class jsonParser {
         Iterator iteratorArray = object.iterator();
         while (iteratorArray.hasNext()){
             JSONObject object2 = (JSONObject) iteratorArray.next();
-            for (String cle : clesLot){
+            for (String cle : lotKeys){
                 if ( !object2.has(cle) ) return false;
             }
         }        
