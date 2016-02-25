@@ -18,17 +18,19 @@ import java.util.*;
 import net.sf.json.*;
 
 /*
- * Classe permettant de parser le fichier JSON *
+ * Class that parses the input json file
  * ---------------------
  * @author robeen      |
  * ---------------------
  */
 public class jsonParser {
     private static JSONObject json;
-    private static final String[] clesTerrain = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
-    private static final String[] clesLot = {"description","nombre_droits_passage","nombre_services","superficie","date_mesure"};
+    private static final String[] terrainKeys = {"type_terrain","prix_m2_min",
+        "prix_m2_max","lotissements"};
+    private static final String[] lotKeys = {"description","nombre_droits_passa"
+            + "ge","nombre_services","superficie","date_mesure"};
     
-    // Parse le Json et retourne le premier Terrain
+    // Parse the input Json file and return the first Terrain
     public static Terrain parseJson(String fileName){
         String jsonString;
         jsonString = jsonParser.jsonToString(fileName);
@@ -36,7 +38,7 @@ public class jsonParser {
             json = JSONObject.fromObject(jsonString);
             formatJSONKeys(json);
             if (validateJSONTerrain()) 
-                return creerTerrain();
+                return createTerrain();
             else
                 return null;
         }
@@ -45,7 +47,7 @@ public class jsonParser {
         }
     }
     
-    // Transforme le .json en String
+    // Turn the json file into a String
     public static String jsonToString(String jsonFileName){
         String jsonString;
         try{
@@ -58,45 +60,47 @@ public class jsonParser {
         return jsonString;
     }
     
-    // Crée un terrain
-    public static Terrain creerTerrain(){
+    // Create the Terrain
+    public static Terrain createTerrain(){
         int type = json.getInt("type_terrain");
         float prixMin = getFloat(json.getString("prix_m2_min"));
         float prixMax = getFloat(json.getString("prix_m2_max"));
         ArrayList<Lot> lotissements = getLotissements();
-        Terrain leTerrain = new Terrain(type, prixMin, prixMax, lotissements);
-        return leTerrain;
+        Terrain terrain = new Terrain(type, prixMin, prixMax, lotissements);
+        return terrain;
     }
     
-    // Crée le tableau de lotissements
+    // Create the table of lotissements
     public static ArrayList<Lot> getLotissements(){
         ArrayList<Lot> lotissements = new ArrayList<Lot>();
         JSONArray lotissement = json.getJSONArray("lotissements");
         for(int i = 0; i < lotissement.size(); i++){
-            lotissements.add(creerLotissement(i, lotissement));
+            lotissements.add(createLotissement(i, lotissement));
         }
         return lotissements;
     }
     
-    // Crée un lotissement
-    public static Lot creerLotissement(int index, JSONArray jsonLotissements){
+    // Create a lotissement
+    public static Lot createLotissement(int index, JSONArray jsonLotissements){
         JSONObject jsonLotissement = jsonLotissements.getJSONObject(index);
         String description = jsonLotissement.getString("description");
-        int nbDroitPassage = jsonLotissement.getInt("nombre_droits_passage");
-        int nbService = jsonLotissement.getInt("nombre_services");
+        int nbDroitsPassage = jsonLotissement.getInt("nombre_droits_passage");
+        int nbServices = jsonLotissement.getInt("nombre_services");
         float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
-        return new Lot(nbService, nbDroitPassage, superficie, description, lotDate);
+        return new Lot(nbServices, nbDroitsPassage, superficie, description,
+                lotDate);
     }
     
-    // Extirpe un Float d'un String
-    public static float getFloat(String prix){
-        prix = prix.replace(',', '.');
-        float lePrix = Float.valueOf(prix.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
-        return lePrix;
+    // Get float from a string
+    public static float getFloat(String price){
+        price = price.replace(',', '.');
+        float thePrice = Float.valueOf(price.replaceAll("[^\\d.]+|\\.(?!\\d)",
+                ""));
+        return thePrice;
     }
     
-    // Crée un Object Date partant d'un String au format "yyyy-MM-dd"
+    // Create a date object coming from a string formatted as such : "yyyy-MM-dd"
     public static Date getDate(String jsonDate){
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Date lotDate = new Date();
@@ -112,10 +116,12 @@ public class jsonParser {
         JSONObject object2 = JSONObject.fromObject(object);
         Iterator jsonCles = object2.keys();
         while (jsonCles.hasNext()){
-            String cle=jsonCles.next().toString();
+            String cle = jsonCles.next().toString();
             Object subObject = object2.get(cle);
-            if ( subObject instanceof JSONArray ) formatJSONKeys((JSONArray) subObject);
-            if ( subObject instanceof JSONObject ) formatJSONKeys((JSONObject) subObject);
+            if ( subObject instanceof JSONArray ) formatJSONKeys((JSONArray)
+                    subObject);
+            if ( subObject instanceof JSONObject ) formatJSONKeys((JSONObject)
+                    subObject);
             object.discard(cle);
             object.put(cle.trim().toLowerCase(), subObject);            
         }
@@ -125,14 +131,15 @@ public class jsonParser {
         Iterator iterator = objects.iterator();
         while (iterator.hasNext()){
             Object object = iterator.next();
-            if ( object instanceof JSONObject ) formatJSONKeys((JSONObject) object);
+            if ( object instanceof JSONObject ) formatJSONKeys((JSONObject)
+                    object);
         }
     }
     
     private static boolean validateJSONTerrain(){
-        for (String cle : clesTerrain){
-            if (!json.has(cle)) return false;
-        }
+        for (String key : terrainKeys){
+            if (!json.has(key)) return false;
+        }       
         return validateJSONLots();
     }
     
@@ -142,10 +149,10 @@ public class jsonParser {
         Iterator iteratorArray = object.iterator();
         while (iteratorArray.hasNext()){
             JSONObject object2 = (JSONObject) iteratorArray.next();
-            for (String cle : clesLot){
-                if ( !object2.has(cle) ) return false;
+            for (String key : lotKeys){
+                if ( !object2.has(key) ) return false;
             }
-        }                
+        }        
         return true;
     }
 
@@ -156,4 +163,3 @@ public class jsonParser {
         }
     }
 }
-

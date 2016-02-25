@@ -11,7 +11,6 @@
  * limitations under the License.
  */
 
-//import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,10 +44,11 @@ public class main {
                 Jsonizer.Jsonize(ter, args[1]);
             }
             else{
-                System.out.println("Erreur avec le fichier d'entrée !");
+                System.out.println("Error with the input file !");
             }
         }else{
-            System.out.println("Erreur! le nom du fichier n'a pas ete specifier dans la ligne de commande");
+            System.out.println("Error ! The input file was not specified in the"
+                    + " command line when the program was run.");
         }
         
     }

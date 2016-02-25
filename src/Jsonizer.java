@@ -21,11 +21,13 @@ import java.util.ArrayList;
 
 public class Jsonizer {
 
-    private static final String[] KEY_WORD_TERRAIN = {"\"valeur_fonciere_total\":","\"taxe_scolaire\":"
+    private static final String[] KEY_WORD_TERRAIN = {"\"valeur_fonciere_tot"
+            + "al\":","\"taxe_scolaire\":"
             ,"\"taxe_municipale\":","\"lotissements\":"};
-    private static final String[] KEY_WORD_LOT = {"\"description\":","\"valeur_par_lot\":"};
-
-    // Creation du json file.
+    private static final String[] KEY_WORD_LOT = {"\"description\":","\"valeur_"
+            + "par_lot\":"};
+    
+    // Json file creation.
     public static File createJsonFile(String sortieName){
         File jsonfile = new File(sortieName);
         try {
@@ -46,7 +48,8 @@ public class Jsonizer {
         }        
     }
     
-    public static void WriteInJson (Terrain terrain, String sortieName) throws Exception{
+    public static void WriteInJson (Terrain terrain, String sortieName) throws 
+            Exception{
     File jsonfile = createJsonFile(sortieName);
         FileWriter fileWriter = new FileWriter(jsonfile.getAbsoluteFile());
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -57,7 +60,8 @@ public class Jsonizer {
         bufferedWriter.close();    
     }
     
-    // retourne une collection de String regroupant les information pour le generation de resultat.json
+    // return a string collection with all information needed to generate 
+    // resulat.json
     public static ArrayList<String> createJsonContent(Terrain terrain) {
         ArrayList<String> arrayOfContent = new ArrayList<>();
         if ( terrain.errorMessage.equals("") ) {
@@ -74,8 +78,10 @@ public class Jsonizer {
     public static void loadLotsData (ArrayList<String> array,Terrain terrain){
         for (int i = 0; i < terrain.list_lots.size(); i++) {
             array.add("{\n");
-            array.add(KEY_WORD_LOT[0] + "\"" + terrain.list_lots.get(i).description + "\",\n");
-            array.add(KEY_WORD_LOT[1] + "\"" + String.format("%.2f", terrain.list_lots.get(i).valuePerLot) + "$\"\n}");
+            array.add(KEY_WORD_LOT[0] + "\"" + 
+                    terrain.list_lots.get(i).description + "\",\n");
+            array.add(KEY_WORD_LOT[1] + "\"" + String.format("%.2f", 
+                    terrain.list_lots.get(i).valuePerLot) + "$\"\n}");
             if ((i+1) < terrain.list_lots.size()){
             array.add(",\n");
             }
@@ -85,9 +91,12 @@ public class Jsonizer {
     
     public static void loadTerrainData (ArrayList<String> array, Terrain terrain){
         array.add("{\n");
-        array.add(KEY_WORD_TERRAIN[0] + "\"" + String.format("%.2f", terrain.totalLandValue) +"$\",\n");
-        array.add(KEY_WORD_TERRAIN[1] + "\"" + String.format("%.2f", terrain.schoolTax) + "$\",\n");
-        array.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f", terrain.municipalTax) + "$\",\n");
+        array.add(KEY_WORD_TERRAIN[0] + "\"" + String.format("%.2f", 
+                terrain.totalLandValue) +"$\",\n");
+        array.add(KEY_WORD_TERRAIN[1] + "\"" + String.format("%.2f", 
+                terrain.schoolTax) + "$\",\n");
+        array.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f", 
+                terrain.municipalTax) + "$\",\n");
         array.add(KEY_WORD_TERRAIN[3] + "[\n");
     }
     
