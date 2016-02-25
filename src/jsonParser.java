@@ -18,7 +18,7 @@ import java.util.*;
 import net.sf.json.*;
 
 /*
- * Classe permettant de parser le fichier JSON *
+ * Class that parses the input json file
  * ---------------------
  * @author robeen      |
  * ---------------------
@@ -28,7 +28,7 @@ public class jsonParser {
     private static final String[] clesTerrain = {"type_terrain","prix_m2_min","prix_m2_max","lotissements"};
     private static final String[] clesLot = {"description","nombre_droits_passage","nombre_services","superficie","date_mesure"};
     
-    // Parse le Json et retourne le premier Terrain
+    // Parse the input Json file and return the first Terrain
     public static Terrain parseJson(String fileName){
         String jsonString;
         jsonString = jsonParser.jsonToString(fileName);
@@ -45,7 +45,7 @@ public class jsonParser {
         }
     }
     
-    // Transforme le .json en String
+    // Turn the json file into a String
     public static String jsonToString(String jsonFileName){
         String jsonString;
         try{
@@ -58,17 +58,17 @@ public class jsonParser {
         return jsonString;
     }
     
-    // Crée un terrain
+    // Create the Terrain
     public static Terrain creerTerrain(){
         int type = json.getInt("type_terrain");
         float prixMin = getFloat(json.getString("prix_m2_min"));
         float prixMax = getFloat(json.getString("prix_m2_max"));
         ArrayList<Lot> lotissements = getLotissements();
-        Terrain leTerrain = new Terrain(type, prixMin, prixMax, lotissements);
-        return leTerrain;
+        Terrain terrain = new Terrain(type, prixMin, prixMax, lotissements);
+        return terrain;
     }
     
-    // Crée le tableau de lotissements
+    // Create the table of lotissements
     public static ArrayList<Lot> getLotissements(){
         ArrayList<Lot> lotissements = new ArrayList<Lot>();
         JSONArray lotissement = json.getJSONArray("lotissements");
@@ -78,25 +78,25 @@ public class jsonParser {
         return lotissements;
     }
     
-    // Crée un lotissement
+    // Create a lotissement
     public static Lot creerLotissement(int index, JSONArray jsonLotissements){
         JSONObject jsonLotissement = jsonLotissements.getJSONObject(index);
         String description = jsonLotissement.getString("description");
-        int nbDroitPassage = jsonLotissement.getInt("nombre_droits_passage");
-        int nbService = jsonLotissement.getInt("nombre_services");
+        int nbDroitsPassage = jsonLotissement.getInt("nombre_droits_passage");
+        int nbServices = jsonLotissement.getInt("nombre_services");
         float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
-        return new Lot(nbService, nbDroitPassage, superficie, description, lotDate);
+        return new Lot(nbServices, nbDroitsPassage, superficie, description, lotDate);
     }
     
-    // Extirpe un Float d'un String
+    // Get float from a string
     public static float getFloat(String prix){
         prix = prix.replace(',', '.');
         float lePrix = Float.valueOf(prix.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
         return lePrix;
     }
     
-    // Crée un Object Date partant d'un String au format "yyyy-MM-dd"
+    // Create a date object coming from a string formatted as such : "yyyy-MM-dd"
     public static Date getDate(String jsonDate){
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Date lotDate = new Date();
