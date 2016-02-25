@@ -87,8 +87,8 @@ public class jsonParser {
         JSONObject jsonLotissement = jsonLotissements.getJSONObject(index);
         String description = jsonLotissement.getString("description");
         int nbDroitPassage = jsonLotissement.getInt("nombre_droits_passage");
-        int nbService = jsonLotissement.getInt(" nombre_services");
-        float superficie = getFloat(jsonLotissement.getString(" Superficie"));
+        int nbService = jsonLotissement.getInt("nombre_services");
+        float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
         return new Lot(nbService, nbDroitPassage, superficie, description, lotDate);
     }
