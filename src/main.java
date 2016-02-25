@@ -49,8 +49,6 @@ public class main {
         }else{
             System.out.println("Error ! The input file was not specified in the"
                     + " command line when the program was run.");
-        }
-        
-    }
-    
+        }           
+    }    
 }
