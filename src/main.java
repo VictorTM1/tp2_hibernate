@@ -28,14 +28,20 @@ public class main {
         if(args.length > 0){
             Terrain ter = jsonParser.parseJson(args[0]);
             if(ter != null){
-                for(int i=0;i<ter.list_lots.size();i++){
-                ter.list_lots.get(i).calculateLandValueLot(ter.getType(), ter.priceMin, ter.priceMax);
+                if ( ter.validateValues() ) {
+                    for(int i=0;i<ter.list_lots.size();i++){
+                        if( !ter.list_lots.get(i).validateValues() ) {
+                            ter.errorMessage = ter.list_lots.get(i).errorMessage;
+                            break;
+                        }
+                        ter.list_lots.get(i).calculateLandValueLot(ter.getType(), ter.priceMin, ter.priceMax);
+                    }
+                    if ( ter.errorMessage.equals("") ) {
+                        ter.calculateLandValue();
+                        ter.calculateSchoolTax();
+                        ter.calculateMunicipalTax();
+                    }
                 }
-
-                ter.calculateLandValue();
-                ter.calculateSchoolTax();
-                ter.calculateMunicipalTax();
-
                 Jsonizer.Jsonize(ter, args[1]);
             }
             else{

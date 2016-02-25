@@ -40,7 +40,7 @@ public class Jsonizer {
     
     public static void Jsonize(Terrain terrain, String sortieName) {
         try {
-        WriteInJson(terrain,sortieName);   
+            WriteInJson(terrain,sortieName);   
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }        
@@ -60,8 +60,14 @@ public class Jsonizer {
     // retourne une collection de String regroupant les information pour le generation de resultat.json
     public static ArrayList<String> createJsonContent(Terrain terrain) {
         ArrayList<String> arrayOfContent = new ArrayList<>();
-        loadTerrainData(arrayOfContent, terrain);
-        loadLotsData(arrayOfContent, terrain);
+        if ( terrain.errorMessage.equals("") ) {
+            loadTerrainData(arrayOfContent, terrain);
+            loadLotsData(arrayOfContent, terrain);
+        } else {
+            arrayOfContent.add("{\n");
+            arrayOfContent.add("\"message\": \"" + terrain.errorMessage + "\"\n");
+            arrayOfContent.add("}");
+        }
         return arrayOfContent;
     }
     

@@ -27,6 +27,7 @@ public class Terrain {
     float totalLandValue;
     float schoolTax;
     float municipalTax;
+    String errorMessage;
     
     public Terrain(){
         this.type = 0;
@@ -36,6 +37,7 @@ public class Terrain {
         this.totalLandValue = 0;
         this.schoolTax = 0;
         this.municipalTax = 0;
+        this.errorMessage = "";
     }
     
     public Terrain(int type, float min, float max, ArrayList<Lot> lots){
@@ -43,6 +45,7 @@ public class Terrain {
         this.priceMin = min;
         this.priceMax = max;
         this.list_lots=lots;
+        this.errorMessage = "";
     }
     
     public ArrayList<Lot> getListeLots(){
@@ -87,5 +90,16 @@ public class Terrain {
             val = val + 5 -(val%5);
         }
         return val/100;
+    }
+    
+    public boolean validateValues(){
+        if ( this.type < 0 || this.type > 2 ){
+            this.errorMessage = "La valeur de type_terrain doit être un nombre parmi 0, 1 ou 2";
+        } else if ( this.priceMax < 0 || this.priceMin < 0 ) {
+            this.errorMessage = "Une valeur d'argent ne doit pas être négative";
+        } else if ( this.list_lots.isEmpty() || this.list_lots.size() > 10 ) {
+            this.errorMessage = "Un terrain doit avoir au moins 1 lot et au plus 10 lots";
+        }
+        return this.errorMessage.equals("");
     }
 }

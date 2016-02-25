@@ -132,7 +132,7 @@ public class jsonParser {
     private static boolean validateJSONTerrain(){
         for (String cle : clesTerrain){
             if (!json.has(cle)) return false;
-        }       
+        }
         return validateJSONLots();
     }
     
@@ -145,7 +145,7 @@ public class jsonParser {
             for (String cle : clesLot){
                 if ( !object2.has(cle) ) return false;
             }
-        }        
+        }                
         return true;
     }
 
