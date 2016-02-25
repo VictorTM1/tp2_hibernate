@@ -6,22 +6,22 @@
  {
  "description":"Lot 1",
  "nombre_droits_passage":4,
- " nombre_services":0,
- " Superficie":465,
+ "nombre_services":0,
+ "superficie":465,
  "date_mesure":"2015-10-14"
  },
  {
  "description":" Lot 2",
  "nombre_droits_passage":0,
- " nombre_services":1,
- " Superficie":1082,
+ "nombre_services":1,
+ "superficie":1082,
  "date_mesure":"2015-12-15"
  },
  {
  "description":"Lot 3",
  "nombre_droits_passage":8,
- " nombre_services":3,
- " Superficie":3333,
+ "nombre_services":3,
+ "superficie":3333,
  "date_mesure":"2013-06-20"
  }
  ]
