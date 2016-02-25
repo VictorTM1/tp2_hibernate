@@ -1,0 +1,19 @@
+{
+"valeur_fonciere_total":"16943.60$",
+"taxe_scolaire":"203.35$",
+"taxe_municipale":"423.60$",
+"Lotissements":[
+{
+"description":"Lot 1",
+"valeur_par_lot":"2802.00$"
+},
+{
+"description":" Lot 2",
+"valeur_par_lot":"12574.00$"
+},
+{
+"description":"Lot 3",
+"valeur_par_lot":"833.80$"
+}
+]
+}
