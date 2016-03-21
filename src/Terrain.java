@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * @author dvmedellin
  */
 public class Terrain {
+    private static final int ROUNDER = 5;
     private static final float BASIC_PRICE = 733.77f;    
     private static final float SCHOLAR_TAX = 0.012f; //1.2%
     private static final float MUNICIPAL_TAX = 0.025f; //1.2%
@@ -73,22 +74,26 @@ public class Terrain {
         for(int i = 0 ; i < this.list_lots.size(); i++){
             val = val + this.list_lots.get(i).valuePerLot;
         }
-        this.totalLandValue = round(val); 
+        this.totalLandValue = round(val, ROUNDER); 
     }
     
     public void calculateSchoolTax(){
-        this.schoolTax = round(this.totalLandValue*SCHOLAR_TAX);
+        this.schoolTax = round(this.totalLandValue*SCHOLAR_TAX, ROUNDER);
     }
     
     public void calculateMunicipalTax(){
-        this.municipalTax = round(this.totalLandValue*MUNICIPAL_TAX);
+        this.municipalTax = round(this.totalLandValue*MUNICIPAL_TAX, ROUNDER);
     }
     
-    private float round(float value){
+    private float round(float value, int rounder){
         float val = Math.round(value*100);
-        if((val%5) != 0) {
-            val = val + 5 - (val % 5);
+        int cents = (int) val%rounder;
+        
+        if (cents > 0) {
+            if (cents < rounder/2) val = val - cents;
+            else val = val + 5 - cents;
         }
+        
         return val/100;
     }
     
