@@ -24,7 +24,11 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
-        if(args.length > 0){
+        if(args[0].equals("-S")){
+            History.printHistory();
+        }else if(args[0].equals("-SR")){
+            History.resetHistory();
+        }else if(args.length > 0){
             Terrain ter = jsonParser.parseJson(args[0]);
             if(ter != null){
                 if ( ter.validateValues() ) {
@@ -41,6 +45,7 @@ public class main {
                         ter.calculateMunicipalTax();
                     }
                 }
+                History.updateHistory(ter);
                 Jsonizer.Jsonize(ter, args[1]);
             }
             else{
