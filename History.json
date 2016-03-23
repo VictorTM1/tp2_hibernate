@@ -1,1 +1,1 @@
-{"numberOfTerrain":14,"lotsBetween1000And10000":14,"lotsHigher10000":14,"lotsUnder1000":14,"highestSurfaceArea":3333,"highestValueForLot":12574,"lotsTerrainType0":0,"lotsTerrainType1":0,"lotsTerrainType2":14}
+{"nombre_terrain":2,"nombre_lots_entre_1000$_et_10000$":2,"nombre_lots_plus_de_10000$":2,"nombre_lots_moins_de_1000$":2,"superficie_maximale":3333,"valeur_maximale_pour_un_lot":12574,"nombre_lots_terrain_type0":0,"nombre_lots_terrain_type1":0,"nombre_lots_terrain_type2":3334}
