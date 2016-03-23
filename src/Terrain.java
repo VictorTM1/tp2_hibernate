@@ -17,18 +17,19 @@ import java.util.ArrayList;
  * @author dvmedellin
  */
 public class Terrain {
-    private static final float BASIC_PRICE = 733.77f;    
+
+    private static final float BASIC_PRICE = 733.77f;
     private static final float SCHOLAR_TAX = 0.012f; //1.2%
     private static final float MUNICIPAL_TAX = 0.025f; //1.2%
-    
+
     int type;
     float priceMin, priceMax;
     ArrayList<Lot> list_lots;
     float totalLandValue;
     float schoolTax;
     float municipalTax;
-    
-    public Terrain(){
+
+    public Terrain() {
         this.type = 0;
         this.priceMin = 0;
         this.priceMax = 0;
@@ -37,55 +38,55 @@ public class Terrain {
         this.schoolTax = 0;
         this.municipalTax = 0;
     }
-    
-    public Terrain(int type, float min, float max, ArrayList<Lot> lots){
+
+    public Terrain(int type, float min, float max, ArrayList<Lot> lots) {
         this.type = type;
         this.priceMin = min;
         this.priceMax = max;
         this.list_lots = lots;
     }
-    
-    public ArrayList<Lot> getListeLots(){
+
+    public ArrayList<Lot> getListeLots() {
         return this.list_lots;
     }
-    
-    public int getType(){
+
+    public int getType() {
         return this.type;
     }
-    
-    public float getPriceMin(){
+
+    public float getPriceMin() {
         return this.priceMin;
     }
-    
-    public float getPriceMax(){
+
+    public float getPriceMax() {
         return this.priceMax;
     }
-    
-    public float getAveragePrice(){
-        return (getPriceMin()+getPriceMax())/2;
+
+    public float getAveragePrice() {
+        return (getPriceMin() + getPriceMax()) / 2;
     }
-    
-    public void calculateLandValue(){
+
+    public void calculateLandValue() {
         float val = BASIC_PRICE;
-        for(int i = 0 ; i < this.list_lots.size(); i++){
+        for (int i = 0; i < this.list_lots.size(); i++) {
             val = val + this.list_lots.get(i).valuePerLot;
         }
-        this.totalLandValue = round(val); 
+        this.totalLandValue = round(val);
     }
-    
-    public void calculateSchoolTax(){
-        this.schoolTax = round(this.totalLandValue*SCHOLAR_TAX);
+
+    public void calculateSchoolTax() {
+        this.schoolTax = round(this.totalLandValue * SCHOLAR_TAX);
     }
-    
-    public void calculateMunicipalTax(){
-        this.municipalTax = round(this.totalLandValue*MUNICIPAL_TAX);
+
+    public void calculateMunicipalTax() {
+        this.municipalTax = round(this.totalLandValue * MUNICIPAL_TAX);
     }
-    
-    private float round(float value){
-        float val = Math.round(value*100);
-        if((val%5) != 0) {
+
+    private float round(float value) {
+        float val = Math.round(value * 100);
+        if ((val % 5) != 0) {
             val = val + 5 - (val % 5);
         }
-        return val/100;
+        return val / 100;
     }
 }

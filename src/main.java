@@ -20,31 +20,31 @@ import net.sf.json.*;
  * @author ventilooo
  */
 public class main {
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException{
-        if(args.length > 0){
+    public static void main(String[] args) throws IOException {
+        if (args.length > 0) {
             Terrain terrains = jsonParser.parseJson(args[0]);
-            if(terrains != null){
-                for(int i = 0; i < terrains.list_lots.size() ; i++){
-                terrains.list_lots.get(i).calculateLandValueLot(
-                        terrains.getType(), terrains.priceMin, 
-                        terrains.priceMax);
+            if (terrains != null) {
+                for (int i = 0; i < terrains.list_lots.size(); i++) {
+                    terrains.list_lots.get(i).calculateLandValueLot(
+                            terrains.getType(), terrains.priceMin,
+                            terrains.priceMax);
                 }
                 terrains.calculateLandValue();
                 terrains.calculateSchoolTax();
                 terrains.calculateMunicipalTax();
                 Jsonizer.Jsonize(terrains, args[1]);
-            }
-            else{
+            } else {
                 System.out.println("Error with the input file !");
             }
-        }else{
+        } else {
             System.out.println("Error ! The input file was not specified in the"
                     + " command line when the program was run.");
         }
-        
+
     }
-    
+
 }
