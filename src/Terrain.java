@@ -105,7 +105,6 @@ public class Terrain {
         for(int i = 0; i <= this.list_lots.size() - 1; i++){
             String description = list_lots.get(i).description;
             for(int j = i + 1; j < this.list_lots.size(); j++){
-                System.out.println(this.list_lots.get(j).description);
                 if(this.list_lots.get(j).description.equals(description)){
                     return false;
                 }
