@@ -89,10 +89,8 @@ public class Terrain {
         float val = Math.round(value*100);
         int cents = (int) val%rounder;
         
-        if (cents > 0) {
-            if (cents < rounder/2) val = val - cents;
-            else val = val + 5 - cents;
-        }
+        if (cents < rounder/2) val = val - cents;
+        else val = val + 5 - cents;
         
         return val/100;
     }
