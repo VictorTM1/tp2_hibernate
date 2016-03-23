@@ -85,15 +85,20 @@ public class Terrain {
     public void calculateMunicipalTax() {
         this.municipalTax = round(this.totalLandValue * MUNICIPAL_TAX, ROUNDER);
     }
-    
-    private float round(float value, int rounder){
-        float val = Math.round(value*100);
-        int cents = (int) val%rounder;
-        
-        if (cents < rounder/2) val = val - cents;
-        else val = val + 5 - cents;
-        
-        return val/100;
+
+    private float round(float value, int rounder) {
+        float val = Math.round(value * 100);
+        int cents = (int) val % rounder;
+
+        if (cents > 0) {
+            if (cents < rounder / 2) {
+                val = val - cents;
+            } else {
+                val = val + 5 - cents;
+            }
+        }
+
+        return val / 100;
     }
 
     public boolean validateValues() {
