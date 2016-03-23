@@ -97,6 +97,18 @@ public class Terrain {
         return val/100;
     }
     
+    public boolean descriptionsOk(){
+        for(int i = 0; i < this.list_lots.size(); i++){
+            String description = list_lots.get(i).description;
+            for(int j = 0; j < this.list_lots.size(); i++){
+                if(this.list_lots.get(j).description == description || description == ""){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     public boolean validateValues(){
         if ( this.type < 0 || this.type > 2 ){
             this.errorMessage = "La valeur de type_terrain doit être un nombre parmi 0, 1 ou 2";
@@ -104,6 +116,8 @@ public class Terrain {
             this.errorMessage = "Une valeur d'argent ne doit pas être négative";
         } else if ( this.list_lots.isEmpty() || this.list_lots.size() > 10 ) {
             this.errorMessage = "Un terrain doit avoir au moins 1 lot et au plus 10 lots";
+        } else if (!descriptionsOk()){
+            this.errorMessage = "Une ou plusieurs description(s) de terrain(s) sont similaire(s) et/ou vide(s).";
         }
         return this.errorMessage.equals("");
     }

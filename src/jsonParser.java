@@ -88,21 +88,8 @@ public class jsonParser {
         int nbServices = jsonLotissement.getInt("nombre_services");
         float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
-        if(!descriptionExist(description, lotissements)){
-           return new Lot(nbServices, nbDroitsPassage, superficie, description,
-                lotDate);
-        }
-        return null;
-    }
-    
-    // Valide la description d'un lotissement
-    public static boolean descriptionExist(String description, ArrayList <Lot> lotissements){
-        for(int i = 0; i < lotissements.size(); i++){
-            if(lotissements.get(i).description == description){
-                return true;
-            }
-        }
-        return false;
+        return new Lot(nbServices, nbDroitsPassage, superficie, description,
+        lotDate);
     }
     
     // Get float from a string
