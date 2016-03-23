@@ -25,15 +25,6 @@ public class Jsonizer {
     private static final String[] KEY_WORD_LOT = {"\"description\":", "\"valeur_"
         + "par_lot\":"};
 
-    private static final String[] ERROR_MESSAGES = {"Le nombre de droits de pas"
-        + "sage est supérieur à 10.", "Le nombre de droits de passage est in"
-        + "férieur à 0.", "Le nombre de service est supérieur à 5.", "Le nomb"
-        + "re de service est inférieur à 0.", "Le type de valeur du terrain "
-        + "n'est pas entre 0 et 2", "Le nombres de Lots est supérieur à 10.",
-        "Le nombres de Lots est inférieurs à 1.", "Le montant d'argent est "
-        + "négatif.", "La superficie est négative.", "La superficie est supér"
-        + "ieur à 50000 m2."};
-
     // Json file creation.
     public static File createJsonFile(String sortieName) {
         File jsonfile = new File(sortieName);
@@ -71,8 +62,14 @@ public class Jsonizer {
     // resulat.json
     public static ArrayList<String> createJsonContent(Terrain terrain) {
         ArrayList<String> arrayOfContent = new ArrayList<>();
-        loadTerrainData(arrayOfContent, terrain);
-        loadLotsData(arrayOfContent, terrain);
+        if (terrain.errorMessage.equals("")) {
+            loadTerrainData(arrayOfContent, terrain);
+            loadLotsData(arrayOfContent, terrain);
+        } else {
+            arrayOfContent.add("{\n");
+            arrayOfContent.add("\"message\": \"" + terrain.errorMessage + "\"\n");
+            arrayOfContent.add("}");
+        }
         return arrayOfContent;
     }
 

@@ -65,31 +65,44 @@ public class jsonParser {
         int type = json.getInt("type_terrain");
         float prixMin = getFloat(json.getString("prix_m2_min"));
         float prixMax = getFloat(json.getString("prix_m2_max"));
-        ArrayList<Lot> lotissements = getLotissements();
+        ArrayList<Lot> lotissements = createLotissementTable();
         Terrain terrain = new Terrain(type, prixMin, prixMax, lotissements);
         return terrain;
     }
 
     // Create the table of lotissements
-    public static ArrayList<Lot> getLotissements() {
+    public static ArrayList<Lot> createLotissementTable() {
         ArrayList<Lot> lotissements = new ArrayList<Lot>();
         JSONArray lotissement = json.getJSONArray("lotissements");
         for (int i = 0; i < lotissement.size(); i++) {
-            lotissements.add(createLotissement(i, lotissement));
+            lotissements.add(createLotissement(i, lotissement, lotissements));
         }
         return lotissements;
     }
 
     // Create a lotissement
-    public static Lot createLotissement(int index, JSONArray jsonLotissements) {
+    public static Lot createLotissement(int index, JSONArray jsonLotissements, ArrayList<Lot> lotissements) {
         JSONObject jsonLotissement = jsonLotissements.getJSONObject(index);
         String description = jsonLotissement.getString("description");
         int nbDroitsPassage = jsonLotissement.getInt("nombre_droits_passage");
         int nbServices = jsonLotissement.getInt("nombre_services");
         float superficie = getFloat(jsonLotissement.getString("superficie"));
         Date lotDate = getDate(jsonLotissement.getString("date_mesure"));
-        return new Lot(nbServices, nbDroitsPassage, superficie, description,
-                lotDate);
+        if (!descriptionExist(description, lotissements)) {
+            return new Lot(nbServices, nbDroitsPassage, superficie, description,
+                    lotDate);
+        }
+        return null;
+    }
+
+    // Valide la description d'un lotissement
+    public static boolean descriptionExist(String description, ArrayList<Lot> lotissements) {
+        for (int i = 0; i < lotissements.size(); i++) {
+            if (lotissements.get(i).description == description) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Get float from a string

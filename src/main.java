@@ -25,18 +25,29 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        if (args.length > 0) {
-            Terrain terrains = jsonParser.parseJson(args[0]);
-            if (terrains != null) {
-                for (int i = 0; i < terrains.list_lots.size(); i++) {
-                    terrains.list_lots.get(i).calculateLandValueLot(
-                            terrains.getType(), terrains.priceMin,
-                            terrains.priceMax);
+        if (args[0].equals("-S")) {
+            History.printHistory();
+        } else if (args[0].equals("-SR")) {
+            History.resetHistory();
+        } else if (args.length > 0) {
+            Terrain ter = jsonParser.parseJson(args[0]);
+            if (ter != null) {
+                if (ter.validateValues()) {
+                    for (int i = 0; i < ter.list_lots.size(); i++) {
+                        if (!ter.list_lots.get(i).validateValues()) {
+                            ter.errorMessage = ter.list_lots.get(i).errorMessage;
+                            break;
+                        }
+                        ter.list_lots.get(i).calculateLandValueLot(ter.getType(), ter.priceMin, ter.priceMax);
+                    }
+                    if (ter.errorMessage.equals("")) {
+                        ter.calculateLandValue();
+                        ter.calculateSchoolTax();
+                        ter.calculateMunicipalTax();
+                    }
                 }
-                terrains.calculateLandValue();
-                terrains.calculateSchoolTax();
-                terrains.calculateMunicipalTax();
-                Jsonizer.Jsonize(terrains, args[1]);
+                History.updateHistory(ter);
+                Jsonizer.Jsonize(ter, args[1]);
             } else {
                 System.out.println("Error with the input file !");
             }
@@ -44,7 +55,5 @@ public class main {
             System.out.println("Error ! The input file was not specified in the"
                     + " command line when the program was run.");
         }
-
     }
-
 }
