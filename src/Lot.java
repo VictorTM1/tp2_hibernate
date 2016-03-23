@@ -16,16 +16,17 @@ import java.util.Date;
 /**
  *
  * @author dvmedellin
- */       
+ */
 public class Lot {
+
     String description;
     int nbAccess, nbService;
     float surfaceArea;
     Date dateMeasured;
     float valuePerLot;
     String errorMessage;
-    
-    public Lot(){
+
+    public Lot() {
         this.description = "";
         this.nbAccess = 0;
         this.nbService = 0;
@@ -34,9 +35,9 @@ public class Lot {
         this.valuePerLot = 0;
         this.errorMessage = "";
     }
-    
+
     public Lot(int service, int access, float surfaceArea, String description,
-            Date date){
+            Date date) {
         this.description = description;
         this.nbAccess = access;
         this.nbService = service + 2;
@@ -45,85 +46,85 @@ public class Lot {
         this.errorMessage = "";
         valuePerLot = 0;
     }
-    
-    public void calculateLandValueLot(int type, float priceMin, float priceMax){
+
+    public void calculateLandValueLot(int type, float priceMin, float priceMax) {
         float valueLot = calculateValueSurfaceArea(type, priceMin, priceMax);
         float valueAccess = calculateValueAccess(valueLot, type);
         float valueServices = calculateValueServices(type);
         this.valuePerLot = (valueLot + valueAccess + valueServices);
     }
-    
-    public float calculateValueAccess(float valueLot, int type){
+
+    public float calculateValueAccess(float valueLot, int type) {
         float val = 500;
-        float percent = (float)( 5 *( type + 1) ) / 100;
-        return (val - (this.nbAccess*valueLot*percent));
+        float percent = (float) (5 * (type + 1)) / 100;
+        return (val - (this.nbAccess * valueLot * percent));
     }
-    
-    public float calculateValueSurfaceArea(int type, float priceMin, 
-            float priceMax){
+
+    public float calculateValueSurfaceArea(int type, float priceMin,
+            float priceMax) {
         float price = calculatePriceSurfaceByType(type, priceMin, priceMax);
         return (this.surfaceArea * price);
     }
-    
+
     public float calculatePriceSurfaceByType(int type, float priceMin,
-            float priceMax){
-        if( type == 0){
+            float priceMax) {
+        if (type == 0) {
             return priceMin;
-        }else if(type == 1){
-            return ((priceMin + priceMax)/2);
-        }else{
+        } else if (type == 1) {
+            return ((priceMin + priceMax) / 2);
+        } else {
             return priceMax;
         }
     }
-    
-    public float calculateValueServices(int type){
+
+    public float calculateValueServices(int type) {
         float prix = calculatePriceServiceByType(type);
-        if(prix > 5000){
+        if (prix > 5000) {
             return 5000;
-        }else{
+        } else {
             return prix;
         }
     }
-    
-    public float calculatePriceServiceByType(int type){
-        if(type == 0){
+
+    public float calculatePriceServiceByType(int type) {
+        if (type == 0) {
             return 0;
-        }else if(type == 1){
+        } else if (type == 1) {
             return calculateValueServicesType1();
-        }else{
+        } else {
             return calculateValueServicesType2();
         }
     }
-    
-    public float calculateValueServicesType1(){
-        if(this.surfaceArea <= 500){
+
+    public float calculateValueServicesType1() {
+        if (this.surfaceArea <= 500) {
             return 0;
-        }else if(this.surfaceArea <= 10000){
+        } else if (this.surfaceArea <= 10000) {
             return 500 * this.nbService;
-        }else{
+        } else {
             return 1000 * this.nbService;
         }
     }
-    
-    public float calculateValueServicesType2(){
-        if(this.surfaceArea <= 500){
+
+    public float calculateValueServicesType2() {
+        if (this.surfaceArea <= 500) {
             return 500 * this.nbService;
-        }else {
+        } else {
             return 1500 * this.nbService;
         }
     }
-    
-    public boolean validateValues(){
-        if ( this.nbAccess < 0 || this.nbAccess > 10 ){
+
+    public boolean validateValues() {
+        if (this.nbAccess < 0 || this.nbAccess > 10) {
             this.errorMessage = "le nombre d'accès doit être entre 0 et 10 inclusivement";
-        } else if ( this.nbService < 0 || this.nbService > 5 ) {
+        } else if (this.nbService < 0 || this.nbService > 5) {
             this.errorMessage = "le nombre de services doit être entre 0 et 5 inclusivement";
-        } else if ( this.surfaceArea < 0 || this.surfaceArea > 50000 ) {
+        } else if (this.surfaceArea < 0 || this.surfaceArea > 50000) {
             this.errorMessage = "la superficie d'un lot ne peut être negative ni depasser 50000 m2";
-        } else if ( this.dateMeasured.toString().matches("[0-9]{4}-[0-9]{2}-[0-9]{2}") ) {
+        } else if (this.dateMeasured.toString().matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
             this.errorMessage = "les dates doivent respecter le format ISO8601";
         }
-        
+
         return this.errorMessage.equals("");
     }
 }

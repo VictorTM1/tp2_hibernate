@@ -17,11 +17,12 @@ import java.util.ArrayList;
  * @author dvmedellin
  */
 public class Terrain {
+
     private static final int ROUNDER = 5;
-    private static final float BASIC_PRICE = 733.77f;    
+    private static final float BASIC_PRICE = 733.77f;
     private static final float SCHOLAR_TAX = 0.012f; //1.2%
     private static final float MUNICIPAL_TAX = 0.025f; //1.2%
-    
+
     int type;
     float priceMin, priceMax;
     ArrayList<Lot> list_lots;
@@ -29,8 +30,8 @@ public class Terrain {
     float schoolTax;
     float municipalTax;
     String errorMessage;
-    
-    public Terrain(){
+
+    public Terrain() {
         this.type = 0;
         this.priceMin = 0;
         this.priceMax = 0;
@@ -40,49 +41,49 @@ public class Terrain {
         this.municipalTax = 0;
         this.errorMessage = "";
     }
-    
-    public Terrain(int type, float min, float max, ArrayList<Lot> lots){
+
+    public Terrain(int type, float min, float max, ArrayList<Lot> lots) {
         this.type = type;
         this.priceMin = min;
         this.priceMax = max;
-        this.list_lots=lots;
+        this.list_lots = lots;
         this.errorMessage = "";
     }
-    
-    public ArrayList<Lot> getListeLots(){
+
+    public ArrayList<Lot> getListeLots() {
         return this.list_lots;
     }
-    
-    public int getType(){
+
+    public int getType() {
         return this.type;
     }
-    
-    public float getPriceMin(){
+
+    public float getPriceMin() {
         return this.priceMin;
     }
-    
-    public float getPriceMax(){
+
+    public float getPriceMax() {
         return this.priceMax;
     }
-    
-    public float getAveragePrice(){
-        return (getPriceMin()+getPriceMax())/2;
+
+    public float getAveragePrice() {
+        return (getPriceMin() + getPriceMax()) / 2;
     }
-    
-    public void calculateLandValue(){
+
+    public void calculateLandValue() {
         float val = BASIC_PRICE;
-        for(int i = 0 ; i < this.list_lots.size(); i++){
+        for (int i = 0; i < this.list_lots.size(); i++) {
             val = val + this.list_lots.get(i).valuePerLot;
         }
-        this.totalLandValue = round(val, ROUNDER); 
+        this.totalLandValue = round(val, ROUNDER);
     }
-    
-    public void calculateSchoolTax(){
-        this.schoolTax = round(this.totalLandValue*SCHOLAR_TAX, ROUNDER);
+
+    public void calculateSchoolTax() {
+        this.schoolTax = round(this.totalLandValue * SCHOLAR_TAX, ROUNDER);
     }
-    
-    public void calculateMunicipalTax(){
-        this.municipalTax = round(this.totalLandValue*MUNICIPAL_TAX, ROUNDER);
+
+    public void calculateMunicipalTax() {
+        this.municipalTax = round(this.totalLandValue * MUNICIPAL_TAX, ROUNDER);
     }
     
     private float round(float value, int rounder){
@@ -94,13 +95,13 @@ public class Terrain {
         
         return val/100;
     }
-    
-    public boolean validateValues(){
-        if ( this.type < 0 || this.type > 2 ){
+
+    public boolean validateValues() {
+        if (this.type < 0 || this.type > 2) {
             this.errorMessage = "La valeur de type_terrain doit être un nombre parmi 0, 1 ou 2";
-        } else if ( this.priceMax < 0 || this.priceMin < 0 ) {
+        } else if (this.priceMax < 0 || this.priceMin < 0) {
             this.errorMessage = "Une valeur d'argent ne doit pas être négative";
-        } else if ( this.list_lots.isEmpty() || this.list_lots.size() > 10 ) {
+        } else if (this.list_lots.isEmpty() || this.list_lots.size() > 10) {
             this.errorMessage = "Un terrain doit avoir au moins 1 lot et au plus 10 lots";
         }
         return this.errorMessage.equals("");
