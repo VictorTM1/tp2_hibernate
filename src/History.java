@@ -84,7 +84,7 @@ public class History {
         }else if(newTerrain.type == 2){
            newJson.accumulate(HISTORY_KEYS[4], oldJson.getInt(HISTORY_KEYS[4]) );
            newJson.accumulate(HISTORY_KEYS[5], oldJson.getInt(HISTORY_KEYS[5]) );
-           newJson.accumulate(HISTORY_KEYS[6], oldJson.getInt(HISTORY_KEYS[7]) + 1);
+           newJson.accumulate(HISTORY_KEYS[6], oldJson.getInt(HISTORY_KEYS[6]) + 1);
         }
     }
     
