@@ -26,8 +26,8 @@ public class Jsonizer {
         + "par_lot\":"};
 
     // Json file creation.
-    public static File createJsonFile(String sortieName) {
-        File jsonfile = new File(sortieName);
+    public static File createJsonFile(String outputName) {
+        File jsonfile = new File(outputName);
         try {
             if (!jsonfile.exists()) {
                 jsonfile.createNewFile();
@@ -38,9 +38,9 @@ public class Jsonizer {
         return jsonfile;
     }
 
-    public static void Jsonize(Terrain terrain, String sortieName) {
+    public static void Jsonize(Terrain terrain, String outputName) {
         try {
-            WriteInJson(terrain, sortieName);
+            WriteInJson(terrain, outputName);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -96,6 +96,24 @@ public class Jsonizer {
         array.add(KEY_WORD_TERRAIN[2] + "\"" + String.format("%.2f",
                 terrain.municipalTax) + "$\",\n");
         array.add(KEY_WORD_TERRAIN[3] + "[\n");
+    }
+
+    public static void loadObservations(ArrayList<String> array, Terrain terrain) {
+        if (TestObservation.testDateMesured(terrain)) {
+            array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"");
+        } else if (TestObservation.testFonciereValue(terrain)) {
+            array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"");
+        } else if (TestObservation.testSchoolTaxe(terrain)) {
+            array.add("\"La taxe scolaire payable par le propriétaire ne doit pas dépasser 500.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+        } else if (TestObservation.testSquareMeterPrice(terrain)) {
+            array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le prix minimum du m2.\"");
+        } else if (TestObservation.testTaxeMunicipal(terrain)) {
+            array.add("\"La taxe municipale payable par le propriétaire ne doit pas dépasser 1000.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+        } else if (TestObservation.getTheWrongLotSurfaceMessage(terrain) != null) {
+            array.add(TestObservation.getTheWrongLotSurfaceMessage(terrain));
+        } else if (TestObservation.getTheWrongLotValueMessage(terrain)!= null ) {
+            array.add(TestObservation.getTheWrongLotValueMessage(terrain));
+        }
     }
 
 }

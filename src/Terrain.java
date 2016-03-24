@@ -90,19 +90,14 @@ public class Terrain {
         float val = Math.round(value * 100);
         int cents = (int) val % rounder;
 
-        if (cents > 0) {
-            if (cents < rounder / 2) {
-                val = val - cents;
-            } else {
-                val = val + 5 - cents;
-            }
-        }
+        if (cents < rounder / 2) val = val - cents;
+        else val = val + 5 - cents;
 
         return val / 100;
     }
     
     public boolean descriptionsOk(){
-        for(int i = 0; i < this.list_lots.size() - 1; i++){
+        for(int i = 0; i <= this.list_lots.size() - 1; i++){
             String description = list_lots.get(i).description;
             for(int j = i + 1; j < this.list_lots.size(); j++){
                 if(this.list_lots.get(j).description.equals(description))
