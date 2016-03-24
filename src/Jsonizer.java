@@ -65,6 +65,7 @@ public class Jsonizer {
         if (terrain.errorMessage.equals("")) {
             loadTerrainData(arrayOfContent, terrain);
             loadLotsData(arrayOfContent, terrain);
+            loadObservations(arrayOfContent, terrain);
         } else {
             arrayOfContent.add("{\n");
             arrayOfContent.add("\"message\": \"" + terrain.errorMessage + "\"\n");
@@ -100,18 +101,18 @@ public class Jsonizer {
 
     public static void loadObservations(ArrayList<String> array, Terrain terrain) {
         if (TestObservation.testDateMesured(terrain)) {
-            array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"");
+            array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"\n");
         } else if (TestObservation.testFonciereValue(terrain)) {
-            array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"");
+            array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"\n");
         } else if (TestObservation.testSchoolTaxe(terrain)) {
-            array.add("\"La taxe scolaire payable par le propriétaire ne doit pas dépasser 500.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+            array.add("\"La taxe scolaire payable par le propriétaire ne doit pas dépasser 500.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"\n");
         } else if (TestObservation.testSquareMeterPrice(terrain)) {
-            array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le prix minimum du m2.\"");
+            array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le prix minimum du m2.\"\n");
         } else if (TestObservation.testTaxeMunicipal(terrain)) {
-            array.add("\"La taxe municipale payable par le propriétaire ne doit pas dépasser 1000.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+            array.add("\"La taxe municipale payable par le propriétaire ne doit pas dépasser 1000.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"\n");
         } else if (TestObservation.getTheWrongLotSurfaceMessage(terrain) != null) {
             array.add(TestObservation.getTheWrongLotSurfaceMessage(terrain));
-        } else if (TestObservation.getTheWrongLotValueMessage(terrain)!= null ) {
+        } else if (TestObservation.getTheWrongLotValueMessage(terrain) != null) {
             array.add(TestObservation.getTheWrongLotValueMessage(terrain));
         }
     }
