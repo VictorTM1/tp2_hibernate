@@ -9,19 +9,26 @@
  * @author szala
  */
 import java.util.Date;
+import java.util.*;
 
 public class TestObservation {
-   
 
     public static boolean testLotValue(Lot lot) {
-        return (lot.valuePerLot > 450000.00);
+        return (lot.valuePerLot >  45000.00 );
     }
 
     public static String getTheWrongLotValueMessage(Terrain terrain) {
+        String tmp = "\"La valeur du lot ";
+        boolean test = false;
         for (int i = 0; i < terrain.list_lots.size(); i++) {
             if (testLotValue(terrain.list_lots.get(i))) {
-                return "\"La valeur du lot " + i + " est trop dispendieuse.\"";
+                tmp += "(" + (i + 1) + ")";
+                test = true;
             }
+        }
+        if (test) {
+            tmp += " est trop dispendieuse.\"";
+            return tmp;
         }
         return null;
     }
@@ -31,18 +38,12 @@ public class TestObservation {
     }
 
     public static boolean testDateMesured(Terrain terrain) {
-        Date startDate = new Date();
-        Date endDate = new Date();
         long interval;
-
+        SortedSet<Date> set = new TreeSet<>();
         for (Lot element : terrain.list_lots) {
-            if (element.dateMeasured.before(startDate)) {
-                startDate = element.dateMeasured;
-            } else if (element.dateMeasured.after(endDate)) {
-                endDate = element.dateMeasured;
-            }
+            set.add(element.dateMeasured);
         }
-        interval = endDate.getTime() - startDate.getTime();
+        interval = set.last().getTime() - set.first().getTime();
         return (interval > 15768017280L);
     }
 
@@ -59,10 +60,17 @@ public class TestObservation {
     }
 
     public static String getTheWrongLotSurfaceMessage(Terrain terrain) {
+        String tmp = "\"La taille du lot ";
+        boolean test = false;
         for (int i = 0; i < terrain.list_lots.size(); i++) {
             if (testSurfaceLot(terrain.list_lots.get(i))) {
-                return "\"La taille du lot " + i + " est trop grande.\"";
+                tmp += "(" + (i + 1) + ")";
+                test = true;
             }
+        }
+        if (test) {
+            tmp += " est trop grande.\"";
+            return tmp;
         }
         return null;
     }
@@ -70,16 +78,30 @@ public class TestObservation {
     public static boolean testSquareMeterPrice(Terrain terrain) {
         return (terrain.priceMax > (terrain.priceMin * 2));
     }
-    
-    public static boolean testAll (Terrain terrain) {
-        if (testDateMesured(terrain)) {return true;}
-        if (testFonciereValue(terrain)){return true;}
-        if (testSchoolTaxe(terrain)){return true;}
-        if (testSquareMeterPrice(terrain)){return true;}
-        if (testTaxeMunicipal(terrain)){return true;}
-        if (getTheWrongLotValueMessage(terrain)!=null){return true;}
-        if (getTheWrongLotSurfaceMessage(terrain)!= null){return true;}
-    
+
+    public static boolean testAll(Terrain terrain) {
+        if (testDateMesured(terrain)) {
+            return true;
+        }
+        if (testFonciereValue(terrain)) {
+            return true;
+        }
+        if (testSchoolTaxe(terrain)) {
+            return true;
+        }
+        if (testSquareMeterPrice(terrain)) {
+            return true;
+        }
+        if (testTaxeMunicipal(terrain)) {
+            return true;
+        }
+        if (getTheWrongLotValueMessage(terrain) != null) {
+            return true;
+        }
+        if (getTheWrongLotSurfaceMessage(terrain) != null) {
+            return true;
+        }
+
         return false;
     }
 }

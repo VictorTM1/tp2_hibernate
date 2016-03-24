@@ -100,20 +100,26 @@ public class Jsonizer {
     }
 
     public static void loadObservations(ArrayList<String> array, Terrain terrain) {
-        if (TestObservation.testFonciereValue(terrain)) {
-            array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"");
-            array.add(",");
-        }
-        if (TestObservation.testSchoolTaxe(terrain)) {
-            array.add("\"La taxe scolaire payable par le propriétaire ne doit pas dépasser 500.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
-            array.add(",");
-        }
         if (TestObservation.testSquareMeterPrice(terrain)) {
-            array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le prix minimum du m2.\"");
+            array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le"
+                    + " prix minimum du m2.\"");
             array.add(",");
         }
         if (TestObservation.testTaxeMunicipal(terrain)) {
-            array.add("\"La taxe municipale payable par le propriétaire ne doit pas dépasser 1000.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+            array.add("\"La taxe municipale payable par le propriétaire ne doit "
+                    + "pas dépasser 1000.00 $. Vous devez effectuer deux verseme"
+                    + "nts sont nécessaires pour le payement\"");
+            array.add(",");
+        }
+        if (TestObservation.testFonciereValue(terrain)) {
+            array.add("\"La valeur foncière totale ne doit pas dépasser 300000.0"
+                    + "0 $.\"");
+            array.add(",");
+        }
+        if (TestObservation.testSchoolTaxe(terrain)) {
+            array.add("\"La taxe scolaire payable par le propriétaire ne doit p"
+                    + "as dépasser 500.00 $. Vous devez effectuer deux versement"
+                    + "s sont nécessaires pour le payement\"");
             array.add(",");
         }
         if (TestObservation.getTheWrongLotSurfaceMessage(terrain) != null) {
@@ -125,18 +131,21 @@ public class Jsonizer {
             array.add(",");
         }
         if (TestObservation.testDateMesured(terrain)) {
-            array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"\n");
+            array.add("\"L’écart maximal entre les dates de mesure des lots d’un"
+                    + " même terrain devrait être de moins de 6 mois\"\n");
             array.add(",");
         }
     }
-    
-    public static void observation (ArrayList<String> array, Terrain terrain){
-        if (TestObservation.testAll(terrain)){
+
+    public static void observation(ArrayList<String> array, Terrain terrain) {
+        if (TestObservation.testAll(terrain)) {
             array.add(",\n");
             array.add("\"Observations\":[\n");
             int size = array.size();
             loadObservations(array, terrain);
-            if (array.size() > (size +1)){array.remove(array.size()-1);}
+            if (array.size() > (size + 1)) {
+                array.remove(array.size() - 1);
+            }
             array.add("\n]");
         }
         array.add("\n}");
