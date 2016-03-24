@@ -42,6 +42,7 @@ public class History {
     
     public static void recreateHistory(JSONObject oldJson, Terrain newTerrain) throws IOException{
         int temp;
+        
         JSONObject newJson = new JSONObject();
         temp = oldJson.getInt(HISTORY_KEYS[0]) + 1;
         newJson.accumulate(HISTORY_KEYS[0], temp);
