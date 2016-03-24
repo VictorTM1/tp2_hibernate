@@ -11,6 +11,7 @@
 import java.util.Date;
 
 public class TestObservation {
+   
 
     public static boolean testLotValue(Lot lot) {
         return (lot.valuePerLot > 450000.00);
