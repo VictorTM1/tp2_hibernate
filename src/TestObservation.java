@@ -31,8 +31,8 @@ public class TestObservation {
     }
 
     public static boolean testDateMesured(Terrain terrain) {
-        Date startDate = null;
-        Date endDate = null;
+        Date startDate = new Date();
+        Date endDate = new Date();
         long interval;
 
         for (Lot element : terrain.list_lots) {

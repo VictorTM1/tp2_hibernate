@@ -100,7 +100,7 @@ public class Jsonizer {
     }
 
     public static void loadObservations(ArrayList<String> array, Terrain terrain) {
-        array.add("\n[,\n}");
+        array.add("\n[\n}");
         if (TestObservation.testFonciereValue(terrain)) {
             array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"");
         }
@@ -119,9 +119,9 @@ public class Jsonizer {
         if (TestObservation.getTheWrongLotValueMessage(terrain) != null) {
             array.add(TestObservation.getTheWrongLotValueMessage(terrain));
         }
-        //if (TestObservation.testDateMesured(terrain)) {
-          //  array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"\n");
-        //}
+        if (TestObservation.testDateMesured(terrain)) {
+            array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"\n");
+        }
         array.add("\n],\n}");
     }
 }
