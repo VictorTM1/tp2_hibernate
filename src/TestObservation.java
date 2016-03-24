@@ -70,4 +70,16 @@ public class TestObservation {
     public static boolean testSquareMeterPrice(Terrain terrain) {
         return (terrain.priceMax > (terrain.priceMin * 2));
     }
+    
+    public static boolean testAll (Terrain terrain) {
+        if (testDateMesured(terrain)) {return true;}
+        if (testFonciereValue(terrain)){return true;}
+        if (testSchoolTaxe(terrain)){return true;}
+        if (testSquareMeterPrice(terrain)){return true;}
+        if (testTaxeMunicipal(terrain)){return true;}
+        if (getTheWrongLotValueMessage(terrain)!=null){return true;}
+        if (getTheWrongLotSurfaceMessage(terrain)!= null){return true;}
+    
+        return false;
+    }
 }

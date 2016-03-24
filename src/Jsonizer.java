@@ -65,7 +65,7 @@ public class Jsonizer {
         if (terrain.errorMessage.equals("")) {
             loadTerrainData(arrayOfContent, terrain);
             loadLotsData(arrayOfContent, terrain);
-            loadObservations(arrayOfContent, terrain);
+            observation(arrayOfContent, terrain);
         } else {
             arrayOfContent.add("{\n");
             arrayOfContent.add("\"message\": \"" + terrain.errorMessage + "\"\n");
@@ -85,7 +85,7 @@ public class Jsonizer {
                 array.add(",\n");
             }
         }
-        array.add("\n]\n");
+        array.add("\n]");
     }
 
     public static void loadTerrainData(ArrayList<String> array, Terrain terrain) {
@@ -100,28 +100,45 @@ public class Jsonizer {
     }
 
     public static void loadObservations(ArrayList<String> array, Terrain terrain) {
-        array.add("\n[\n}");
         if (TestObservation.testFonciereValue(terrain)) {
             array.add("\"La valeur foncière totale ne doit pas dépasser 300000.00 $.\"");
+            array.add(",");
         }
         if (TestObservation.testSchoolTaxe(terrain)) {
             array.add("\"La taxe scolaire payable par le propriétaire ne doit pas dépasser 500.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+            array.add(",");
         }
         if (TestObservation.testSquareMeterPrice(terrain)) {
             array.add("\"Le prix maximum du m2 ne peut pas dépasser deux fois le prix minimum du m2.\"");
+            array.add(",");
         }
         if (TestObservation.testTaxeMunicipal(terrain)) {
             array.add("\"La taxe municipale payable par le propriétaire ne doit pas dépasser 1000.00 $. Vous devez effectuer deux versements sont nécessaires pour le payement\"");
+            array.add(",");
         }
         if (TestObservation.getTheWrongLotSurfaceMessage(terrain) != null) {
             array.add(TestObservation.getTheWrongLotSurfaceMessage(terrain));
+            array.add(",");
         }
         if (TestObservation.getTheWrongLotValueMessage(terrain) != null) {
             array.add(TestObservation.getTheWrongLotValueMessage(terrain));
+            array.add(",");
         }
         if (TestObservation.testDateMesured(terrain)) {
             array.add("\"L’écart maximal entre les dates de mesure des lots d’un même terrain devrait être de moins de 6 mois\"\n");
+            array.add(",");
         }
-        array.add("\n],\n}");
+    }
+    
+    public static void observation (ArrayList<String> array, Terrain terrain){
+        if (TestObservation.testAll(terrain)){
+            array.add(",\n");
+            array.add("\"Observations\":[\n");
+            int size = array.size();
+            loadObservations(array, terrain);
+            if (array.size() > (size +1)){array.remove(array.size()-1);}
+            array.add("\n]");
+        }
+        array.add("\n}");
     }
 }
