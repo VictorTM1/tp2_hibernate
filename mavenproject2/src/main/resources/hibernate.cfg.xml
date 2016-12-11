@@ -7,5 +7,18 @@
     <property name="hibernate.connection.url">jdbc:oracle:thin:@zeta2.labunix.uqam.ca:1521:baclab</property>
     <property name="hibernate.connection.username">jh191177</property>
     <property name="hibernate.connection.password">gwCYshiq</property>
+    <mapping resource="fuck/Ordonnancechirurgie.hbm.xml"/>
+    <mapping resource="fuck/Salle.hbm.xml"/>
+    <mapping resource="fuck/Dossierpatient.hbm.xml"/>
+    <mapping resource="fuck/Docteur.hbm.xml"/>
+    <mapping resource="fuck/Ordonnancemedicaments.hbm.xml"/>
+    <mapping resource="fuck/Chirurgie.hbm.xml"/>
+    <mapping resource="fuck/Specialite.hbm.xml"/>
+    <mapping resource="fuck/Medicament.hbm.xml"/>
+    <mapping resource="fuck/Ordonnance.hbm.xml"/>
+    <mapping resource="fuck/Typechirurgie.hbm.xml"/>
+    <mapping resource="fuck/Consultation.hbm.xml"/>
+    <mapping resource="fuck/Specialisationsalle.hbm.xml"/>
+    <mapping resource="fuck/Categories.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

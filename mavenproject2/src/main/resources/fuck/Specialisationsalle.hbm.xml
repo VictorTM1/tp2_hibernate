@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2016 3:12:21 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="fuck.Specialisationsalle" table="SPECIALISATIONSALLE" schema="JH191177" optimistic-lock="version">
+        <composite-id name="id" class="fuck.SpecialisationsalleId">
+            <key-property name="idtype" type="big_decimal">
+                <column name="IDTYPE" precision="22" scale="0" />
+            </key-property>
+            <key-property name="idsalle" type="big_decimal">
+                <column name="IDSALLE" precision="22" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="salle" class="fuck.Salle" update="false" insert="false" fetch="select">
+            <column name="IDSALLE" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="typechirurgie" class="fuck.Typechirurgie" update="false" insert="false" fetch="select">
+            <column name="IDTYPE" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="datec" type="date">
+            <column name="DATEC" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

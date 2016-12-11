@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2016 3:12:21 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="fuck.Chirurgie" table="CHIRURGIE" schema="JH191177" optimistic-lock="version">
+        <id name="idchir" type="big_decimal">
+            <column name="IDCHIR" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="salle" class="fuck.Salle" fetch="select">
+            <column name="IDSALLE" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="typechirurgie" class="fuck.Typechirurgie" fetch="select">
+            <column name="IDTYPE" precision="22" scale="0" />
+        </many-to-one>
+        <property name="datechirurgie" type="date">
+            <column name="DATECHIRURGIE" length="7" />
+        </property>
+        <property name="heuredebut" type="serializable">
+            <column name="HEUREDEBUT" />
+        </property>
+        <property name="heurefin" type="serializable">
+            <column name="HEUREFIN" />
+        </property>
+        <set name="ordonnancechirurgies" table="ORDONNANCECHIRURGIE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCHIR" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="fuck.Ordonnancechirurgie" />
+        </set>
+    </class>
+</hibernate-mapping>

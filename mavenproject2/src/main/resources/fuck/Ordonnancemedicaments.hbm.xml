@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2016 3:12:21 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="fuck.Ordonnancemedicaments" table="ORDONNANCEMEDICAMENTS" schema="JH191177" optimistic-lock="version">
+        <composite-id name="id" class="fuck.OrdonnancemedicamentsId">
+            <key-property name="numord" type="big_decimal">
+                <column name="NUMORD" precision="22" scale="0" />
+            </key-property>
+            <key-property name="idmed" type="big_decimal">
+                <column name="IDMED" precision="22" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="medicament" class="fuck.Medicament" update="false" insert="false" fetch="select">
+            <column name="IDMED" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ordonnance" class="fuck.Ordonnance" update="false" insert="false" fetch="select">
+            <column name="NUMORD" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nbboites" type="big_decimal">
+            <column name="NBBOITES" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2016 3:12:21 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="fuck.Specialite" table="SPECIALITE" schema="JH191177" optimistic-lock="version">
+        <id name="code" type="big_decimal">
+            <column name="CODE" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="titre" type="string">
+            <column name="TITRE" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" />
+        </property>
+        <set name="docteurs" table="DOCTEUR" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SPECIALITE" precision="22" scale="0" />
+            </key>
+            <one-to-many class="fuck.Docteur" />
+        </set>
+    </class>
+</hibernate-mapping>
